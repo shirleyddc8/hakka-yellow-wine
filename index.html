@@ -298,7 +298,6 @@
             line-height: 1.8;
             color: var(--color-text);
             opacity: 1; 
-            white-space: nowrap; 
             font-style: italic; /* NEW: Adds the elegant italic look! */
         }
 
@@ -584,6 +583,68 @@
         .water-dissolve { animation: waterDissolve 1.5s ease-out forwards !important; }
 
         @keyframes popInAnim { to { opacity: 1; transform: scale(1); } }
+
+        /* =========================================
+           RESPONSIVE DESIGN (14" Laptops to iPads)
+           ========================================= */
+
+        /* Target: 14-inch Laptops & Smaller Desktops */
+        @media screen and (max-width: 1400px) {
+            .content-split, .content-row {
+                gap: 30px;
+                width: 98%;
+            }
+            .grandma-img, .story-image-wrapper {
+                flex: 0 0 50%; /* Gives the text box more room */
+            }
+            .text-content, .story-text-wrapper {
+                flex: 0 0 45%;
+                min-height: 300px;
+            }
+            .placeholder-text, .story-text {
+                font-size: 20px; /* Scales font down to fit smaller screens */
+                line-height: 1.6;
+                white-space: normal !important; /* Forces text to wrap safely */
+            }
+            /* Shrink the navigation slightly to prevent overlapping */
+            .top-nav ul { gap: 20px; }
+            .top-nav a { font-size: 20px; }
+        }
+
+        /* Target: iPads and Tablets */
+        @media screen and (max-width: 1024px) {
+            .content-split, .content-row {
+                flex-direction: column; /* Stacks the image on TOP of the text */
+                align-items: center;
+                margin-top: 120px;
+                gap: 20px;
+            }
+            .grandma-img, .story-image-wrapper {
+                flex: 0 0 auto;
+                width: 85%; /* Image takes up most of the iPad screen width */
+                margin-left: 0;
+            }
+            .text-content, .story-text-wrapper {
+                flex: 0 0 auto;
+                width: 90%;
+                margin-top: 15px;
+                padding-left: 0;
+                text-align: center; /* Centers the text nicely under the photo */
+            }
+            .text-content h2, .text-content h3 {
+                text-align: center;
+            }
+            .placeholder-text, .story-text {
+                font-size: 18px; /* iPad-friendly reading size */
+            }
+            
+            /* Shrink the bottom graphics so they don't block the reading area */
+            .rice-field { height: 18vh; }
+            .wine-bottles { height: 20vh; left: 5%; }
+            .stalk-container { height: 45vh; }
+            .side-stalk { height: 50vh; }
+        }
+        
     </style>
 </head>
 <body>
