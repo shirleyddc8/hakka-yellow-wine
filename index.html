@@ -261,30 +261,32 @@
         .dot-2 { width: 22px; height: 22px; margin-bottom: 18px; }
         .dot-3 { width: 14px; height: 14px; }
 
+        /* THE FIX: Made the container centered and flexible */
         .content-split {
             display: flex;
             align-items: flex-start; 
             justify-content: center; 
             gap: 40px; 
-            width: 96%; 
+            width: 92%; /* Safely away from the edges */
+            margin: -30px auto 0 auto; /* Centers it perfectly */
             max-width: 1500px; 
             opacity: 0; 
             z-index: 10; 
-            margin-top: -30px; 
         }
 
+        /* THE FIX: Made the image a squishy sponge */
         .grandma-img {
-            flex: 0 0 55%; 
+            flex: 1 1 50%; 
             max-width: 1100px; 
             width: 100%;
             border-radius: 4px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
-            margin-left: 0; 
         }
 
+        /* THE FIX: Made the text a squishy sponge with a safety bumper */
         .text-content {
-            flex: 0 0 40%; 
-            padding-left: 0px; 
+            flex: 1 1 45%; 
+            padding-right: 30px; /* Invisible bumper prevents cutting off */
             margin-top: 15vh; 
             min-height: 350px; 
         }
@@ -552,9 +554,9 @@
            ========================================= */
 
         @media screen and (max-width: 1400px) {
-            .content-split { gap: 30px; width: 98%; }
-            .grandma-img { flex: 0 0 50%; }
-            .text-content { flex: 0 0 45%; min-height: 300px; }
+            .content-split { gap: 30px; width: 96%; }
+            .grandma-img { flex: 1 1 50%; }
+            .text-content { flex: 1 1 45%; min-height: 300px; padding-right: 25px; }
             .placeholder-text {
                 font-size: 20px; 
                 line-height: 1.6;
@@ -580,6 +582,7 @@
                 width: 90%;
                 margin-top: 15px;
                 padding-left: 0;
+                padding-right: 0;
                 text-align: center; 
             }
             .text-content h2, .text-content h3 { text-align: center; }
@@ -651,8 +654,8 @@
         </div>
         
         <div class="product-details">
-            <h2 style="font-family: var(--font-header); font-size: 38px; color: var(--color-accent); margin-bottom: 10px;">Authentic Hakka Yellow Wine</h2>
-            <h3 style="font-family: var(--font-text); font-size: 22px; font-weight: 400; color: #444; line-height: 1.5; margin-bottom: 25px;">
+            <h2>Authentic Hakka Yellow Wine</h2>
+            <h3>
                 Traditional Singaporean Small-Batch Huangjiu for Culinary Excellence and Postpartum Wellness
             </h3>
             <p class="ingredients">Ingredients: Glutinous Rice, Red Yeast, Traditional Herbs, Spring Water.</p>
