@@ -264,7 +264,8 @@
         .content-split {
             display: flex;
             align-items: flex-start; 
-            justify-content: space-between;
+            justify-content: center; /* Forces the photo and text to sit together */
+            gap: 40px; /* Controls the exact space between them */
             width: 96%; 
             max-width: 1500px; 
             opacity: 0; 
@@ -273,20 +274,21 @@
         }
 
         .grandma-img {
-            flex: 0 0 65%; 
+            /* We dropped this from 65% to 55% to make it exactly 10% smaller! */
+            flex: 0 0 55%; 
             max-width: 1100px; 
             width: 100%;
             border-radius: 4px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
-            margin-left: -30px; 
+            /* Removed the negative margin so it sits perfectly still */
+            margin-left: 0; 
         }
 
         .text-content {
-            flex: 1;
-            padding-left: 90px; 
+            /* We lock the text box to exactly 40% width so typing cannot expand it */
+            flex: 0 0 40%; 
+            padding-left: 0px; 
             margin-top: 15vh; 
-            
-            /* FIX 1: Locks the box height so the page doesn't bounce while typing! */
             min-height: 350px; 
         }
 
@@ -296,9 +298,8 @@
             line-height: 1.8;
             color: var(--color-text);
             opacity: 1; 
-            
-            /* THE FIX: Prevents the long line of dots from bouncing to the next line before the <br> is typed! */
             white-space: nowrap; 
+            font-style: italic; /* NEW: Adds the elegant italic look! */
         }
 
         /* Adds the blinking cursor */
@@ -307,9 +308,10 @@
             margin-left: 2px; 
             color: var(--color-accent); 
             animation: blink 1s step-end infinite; 
+            font-style: normal; /* NEW: Keeps the cursor straight, even though the text is italic */
         }
 
-        /* THE FIX: When actively typing, force the cursor to stay solid */
+        /* When actively typing, force the cursor to stay solid */
         .placeholder-text.is-typing::after {
             animation: none;
             opacity: 1;
@@ -326,7 +328,6 @@
 
         /* --- Product Section --- */
         .product-section {
-            /* Adjusted padding to pull the footer up, removed min-height */
             padding: 80px 10% 40px;
             display: flex;
             align-items: center;
@@ -489,13 +490,9 @@
 
        .footer-social .fa-square-instagram {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    
-            /* The Apple/Google Rule */
-         -webkit-background-clip: text;
-         /* The Standard Rule */
-         background-clip: text;
-    
-         -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .footer-social i:hover {
@@ -511,7 +508,6 @@
         /* SYMMETRICAL 5-POINT ORBITING FLARE ALONG THE BANNER */
         @keyframes orbitingSweep {
             0% { 
-                /* Start left, slightly higher */
                 left: 10%; 
                 top: 20%; 
                 opacity: 0; 
@@ -521,20 +517,17 @@
                 opacity: 1; 
             }
             30% {
-                /* Lift up to the peak */
                 left: 15%;
                 top:20%; 
                 transform: rotate(45deg) scale(1.1); 
             }
             50% { 
-                /* Apex of the central curve */
                 left: 41%; 
                 top: 9%; 
                 opacity: 1; 
                 transform: rotate(90deg) scale(1.2); 
             }
             70% {
-                /* Descend slightly and move right */
                 left: 56%;
                 top: 8%;
                 transform: rotate(135deg) scale(1.1);
@@ -543,7 +536,6 @@
                 opacity: 1; 
             }
             100% { 
-                /* Finish right, on the end-curve */
                 left: 70%; 
                 top: 7%;
                 opacity: 0; 
@@ -600,7 +592,9 @@
 
     <nav class="top-nav">
         <div class="nav-brand">
-            <img src="images/logo.png" alt="Hakka Yellow Wine" class="nav-logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Hakka Yellow Wine" class="nav-logo">
+            </a>
         </div>
         <ul>
             <li><a href="#" class="active home-link">Home</a></li>
@@ -638,7 +632,7 @@
             <div class="content-split">
                 <img src="images/1990s.png" class="grandma-img" alt="Grandma and Daughter cooking">
                 <div class="text-content">
-                    <div class="placeholder-text" data-text="&quot; ...............QUOTE................<br>..............................................<br>..............................................<br>..............................................<br>..............................................<br>..................................&quot;"></div>
+                <div class="placeholder-text" data-text="&quot;Experience the deep,<br>unmatched umami of a generations-old,<br>40-day slow-fermented yellow rice wine<br>handcrafted locally in Singapore<br>with absolute purity for premium sipping,<br>daily gourmet cooking,<br>and restorative traditional wellness.&quot;"></div>
                 </div>
             </div>
         </div>
@@ -652,11 +646,11 @@
         </div>
         
         <div class="product-details">
-            <h2>Authentic Hakka Yellow Wine</h2>
+            <h2 style="font-family: var(--font-header); font-size: 38px; color: var(--color-accent); margin-bottom: 10px;">Authentic Hakka Yellow Wine</h2>
+            <h3 style="font-family: var(--font-text); font-size: 22px; font-weight: 400; color: #444; line-height: 1.5; margin-bottom: 25px;">
+                Traditional Singaporean Small-Batch Huangjiu for Culinary Excellence and Postpartum Wellness
+            </h3>
             <p class="ingredients">Ingredients: Glutinous Rice, Red Yeast, Traditional Herbs, Spring Water.</p>
-            <p class="description">
-                Crafted family's heritage recipe or something... 
-            </p>
             <div class="purchase-action">
                 <span class="price">$38.00</span>
                 <button class="cta-btn">Add to Cart</button>
@@ -723,17 +717,14 @@
                         
                         // Check if we hit a line break
                         if (textToType.substring(i, i+4) === '<br>') {
-                            // Safely inject a physical HTML break element
                             element.appendChild(document.createElement('br'));
                             i += 4;
                         } else {
-                            // THE ULTIMATE FIX: Safely inject a physical text node. 
-                            // Zero deletion. Zero recalculation. Zero flickering.
                             element.appendChild(document.createTextNode(textToType.charAt(i)));
                             i++;
                         }
                         
-                        element.typingTimeout = setTimeout(type, 40); 
+                        element.typingTimeout = setTimeout(type, 15); // SPED UP TYPING!
                     } else {
                         // Unlock the cursor to blink
                         element.classList.remove('is-typing');
@@ -812,7 +803,7 @@
                     animationTimers.push(setTimeout(() => { 
                         placeholderText.style.opacity = '1';
                         typeWriter(placeholderText); 
-                    }, 1000));
+                    }, 0)); // CHANGED FROM 1000 TO 0 TO PREVENT THE FLASH!
                     
                     animationTimers.push(setTimeout(() => {
                         wineBottles.style.transition = 'opacity 2s ease';
