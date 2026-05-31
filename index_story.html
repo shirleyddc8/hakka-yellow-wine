@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakka Yellow Wine | Our Story</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Roboto+Serif:opsz,wght@8..144,400;8..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --font-nav: 'Roboto Serif', serif;
+            --font-text: 'Roboto', sans-serif;
+            --color-text: #2c2c2c;
+            --color-accent: #8b2522; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* STRICT NO-SCROLL LAYOUT */
+        body {
+            font-family: var(--font-text);
+            color: var(--color-text);
+            background-color: #fdfbf7; 
+            overflow: hidden; 
+            height: 100vh; 
+            width: 100vw;
+        }
+
+        .global-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('images/background.jpg'); 
+            background-size: cover; background-position: center;
+            z-index: -10; pointer-events: none;
+        }
+
+        /* --- NAVIGATION --- */
+        .top-nav {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+            padding: 5px 40px; background-color: rgba(253, 251, 247, 0.85);
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .top-nav::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/sunrise.png'); background-size: cover;
+            background-position: center top; opacity: 0.5; z-index: -1;
+        }
+        .nav-brand { display: flex; align-items: center; z-index: 2; }
+        .nav-logo { height: 60px; object-fit: contain; }
+        .top-nav ul { list-style: none; display: flex; gap: 40px; margin: 0; padding: 0; align-items: center; z-index: 2; }
+        .top-nav a { text-decoration: none; color: var(--color-accent); font-family: var(--font-nav); font-size: 24px; font-weight: 700; transition: opacity 0.3s ease; }
+        .top-nav a:hover, .top-nav a.active { opacity: 0.7; }
+
+        /* --- THE SLIDING RICE FIELD BASE --- */
+        .rice-field-base {
+            position: fixed; bottom: 0; left: 0; 
+            width: 100vw; 
+            height: 25vh; 
+            
+            background-image: url('images/rice-field.png'); 
+            background-size: cover; background-position: center top; background-repeat: no-repeat;
+            
+            z-index: 30; pointer-events: none;
+            
+            transform: translateX(-100%);
+            transition: transform 4.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .rice-field-base.slide-in { transform: translateX(0); } 
+
+        /* --- THE RICE STALK --- */
+        .side-stalk {
+            position: fixed; 
+            left: -1%; 
+            bottom: -5%; 
+            height: 75vh; 
+            pointer-events: none; z-index: 50; 
+            
+            opacity: 0; transform-origin: bottom center;
+            transform: translateY(150px) rotate(-10deg);
+            transition: all 3s cubic-bezier(0.2, 0.8, 0.2, 1); 
+        }
+        .side-stalk.grow-in { opacity: 0.9; transform: translateY(0) rotate(0deg); }
+        .side-stalk.sway { animation: windSway 5s ease-in-out infinite alternate; }
+        @keyframes windSway { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(0) rotate(5deg); } }
+
+        /* --- SPLIT LAYOUT CONTAINER --- */
+        .story-section {
+            position: absolute; top: 0; left: 0;
+            width: 100vw; height: 100vh; 
+            padding-top: 80px; 
+            display: flex; 
+            align-items: flex-start; 
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .content-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between; 
+            align-items: center;
+            width: 95%; 
+            max-width: 1500px;
+            z-index: 20; 
+            margin-top: 6vh; 
+        }
+
+        /* --- LEFT SIDE: 16:9 WIDESCREEN IMAGE FRAME --- */
+        .story-image-wrapper {
+            position: relative; 
+            width: 68%; 
+            aspect-ratio: 16 / 9; 
+            height: auto; 
+            background: transparent; overflow: hidden; 
+            border-radius: 4px; 
+            opacity: 0; 
+            transition: opacity 0.1s ease;
+        }
+        
+        .story-image-wrapper.reveal { opacity: 1; }
+
+        .slide-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 1; }
+        .slide-layer.previous { opacity: 1; z-index: 1; -webkit-mask-image: none !important; mask-image: none !important; }
+        
+        .slide-layer.active { 
+            opacity: 1; z-index: 5; 
+            -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+            -webkit-mask-position: center; mask-position: center;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+        }
+        
+        /* THE CAMERA TILT FIX */
+        .story-img { 
+            width: 100%; height: 100%; 
+            object-fit: cover; 
+            /* Moved from 'center' to 'center 10%' to prioritize the top of the photo! */
+            object-position: center 10%; 
+        } 
+        
+        .filter-1950 { -webkit-filter: sepia(0.8) grayscale(0.5) contrast(1.3) brightness(0.9); filter: sepia(0.8) grayscale(0.5) contrast(1.3) brightness(0.9); }
+        .filter-1990 { -webkit-filter: saturate(1.2) contrast(1.1) hue-rotate(-5deg); filter: saturate(1.2) contrast(1.1) hue-rotate(-5deg); }
+
+        /* --- RIGHT SIDE: TEXT AREA --- */
+        .story-text-wrapper { 
+            position: relative; 
+            width: 27%; 
+            height: 400px; 
+            display: flex; flex-direction: column; justify-content: center;
+        }
+
+        .section-header {
+            font-family: var(--font-nav);
+            color: var(--color-accent);
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0; 
+            transform: translateY(20px);
+            transition: all 1.5s ease;
+        }
+        .section-header.active { opacity: 1; transform: translateY(0); }
+        
+        .text-container { position: relative; height: 250px; }
+
+        .story-text {
+            position: absolute; 
+            top: 0; left: 0; width: 100%;
+            font-family: var(--font-text); font-size: 22px; line-height: 2.2; color: var(--color-text);
+            opacity: 0; pointer-events: none;
+        }
+        .story-text.active { opacity: 1; pointer-events: auto; }
+        .story-text::after { content: '|'; animation: blink 1s step-end infinite; margin-left: 2px; color: var(--color-accent); }
+        @keyframes blink { 50% { opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <div class="global-bg"></div>
+    <div class="rice-field-base"></div>
+
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <a href="index_Home.html">
+                <img src="images/logo.png" onerror="this.src='logo.png'" alt="Hakka Yellow Wine" class="nav-logo">
+            </a>
+        </div>
+        
+        <ul>
+            <li><a href="index_Home.html">Home</a></li>
+            
+            <li><a href="index_story.html" class="active">Our Story</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">Confinement Care</a></li>
+            <li><a href="#">Recipes</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <img src="images/ricestalk.png" onerror="this.src='ricestalk.png'" class="side-stalk" alt="Rice Stalk Decoration">
+
+    <section class="story-section">
+        <div class="content-row">
+            
+            <div class="story-image-wrapper" id="image-frame">
+                <div class="slide-layer slide-1950 active">
+                    <img src="images/1950s.jpg" class="story-img filter-1950" alt="1950s History">
+                </div>
+                <div class="slide-layer slide-1970">
+                    <img src="images/1970s.jpg" class="story-img" alt="1970s History">
+                </div>
+                <div class="slide-layer slide-1990">
+                    <img src="images/1990s.jpg" class="story-img filter-1990" alt="1990s History">
+                </div>
+                <div class="slide-layer slide-2000">
+                    <img src="images/2000s.jpg" class="story-img" alt="2000s History">
+                </div>
+                <div class="slide-layer slide-2020">
+                    <img src="images/2020s.jpg" class="story-img" alt="2020s History">
+                </div>
+            </div>
+
+            <div class="story-text-wrapper">
+                <h2 class="section-header">A Family Legacy</h2>
+                <div class="text-container">
+                    <p class="story-text active" data-text=".......................................................<br>.......................................................<br>.......................................................<br>......................................................."></p>
+                    <p class="story-text" data-text=".......................................................<br>.......................................................<br>.......................................................<br>......................................................."></p>
+                    <p class="story-text" data-text=".......................................................<br>.......................................................<br>.......................................................<br>......................................................."></p>
+                    <p class="story-text" data-text=".......................................................<br>.......................................................<br>.......................................................<br>......................................................."></p>
+                    <p class="story-text" data-text=".......................................................<br>.......................................................<br>.......................................................<br>......................................................."></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const slideLayers = document.querySelectorAll('.slide-layer');
+            const texts = document.querySelectorAll('.story-text');
+            const stalk = document.querySelector('.side-stalk');
+            const riceField = document.querySelector('.rice-field-base'); 
+            const header = document.querySelector('.section-header');
+            const imageFrame = document.getElementById('image-frame');
+            
+            let currentIndex = 0;
+            const totalSlides = slideLayers.length;
+
+            function typeWriter(element) {
+                const textToType = element.getAttribute('data-text');
+                element.innerHTML = ''; 
+                let i = 0;
+                if (element.typingTimeout) clearTimeout(element.typingTimeout);
+
+                function type() {
+                    if (i < textToType.length) {
+                        if (textToType.substring(i, i+4) === '<br>') {
+                            element.innerHTML += '<br>';
+                            i += 4;
+                        } else {
+                            element.innerHTML += textToType.charAt(i);
+                            i++;
+                        }
+                        element.typingTimeout = setTimeout(type, 40); 
+                    }
+                }
+                type();
+            }
+
+            setTimeout(() => {
+                
+                riceField.classList.add('slide-in');
+
+                setTimeout(() => {
+                    const firstSlide = slideLayers[0];
+                    const initialMask = `url('images/black-ink.webp?v=${new Date().getTime()}')`;
+                    firstSlide.style.webkitMaskImage = initialMask;
+                    firstSlide.style.maskImage = initialMask;
+                    
+                    imageFrame.classList.add('reveal');
+                }, 2000);
+
+                setTimeout(() => { stalk.classList.add('grow-in'); }, 2500);
+                setTimeout(() => { stalk.classList.add('sway'); }, 5500);
+
+                setTimeout(() => { 
+                    header.classList.add('active');
+                    typeWriter(texts[0]); 
+                }, 4000);
+
+            }, 1000); 
+
+            setInterval(() => {
+                slideLayers.forEach(layer => layer.classList.remove('previous'));
+                slideLayers[currentIndex].classList.remove('active');
+                slideLayers[currentIndex].classList.add('previous');
+                
+                texts[currentIndex].classList.remove('active');
+                texts[currentIndex].innerHTML = ''; 
+
+                currentIndex = (currentIndex + 1) % totalSlides;
+
+                const newSlide = slideLayers[currentIndex];
+                const freshMask = `url('images/black-ink.webp?v=${new Date().getTime()}')`;
+                
+                newSlide.style.webkitMaskImage = freshMask;
+                newSlide.style.maskImage = freshMask;
+                
+                newSlide.classList.add('active');
+                texts[currentIndex].classList.add('active');
+                
+                setTimeout(() => { typeWriter(texts[currentIndex]); }, 2500);
+
+            }, 10000); 
+        });
+    </script>
+
+</body>
+</html>
