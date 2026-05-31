@@ -261,39 +261,40 @@
         .dot-2 { width: 22px; height: 22px; margin-bottom: 18px; }
         .dot-3 { width: 14px; height: 14px; }
 
-        /* THE FIX: Made the container centered and flexible */
+        /* THE FIX: Perfectly balanced container */
         .content-split {
             display: flex;
-            align-items: flex-start; 
-            justify-content: center; 
-            gap: 40px; 
-            width: 92%; /* Safely away from the edges */
-            margin: -30px auto 0 auto; /* Centers it perfectly */
-            max-width: 1500px; 
+            align-items: center; /* Centers the text vertically with the photo */
+            justify-content: space-between; 
+            gap: 3%; /* Uses a percentage gap so the space shrinks too */
+            width: 92%; 
+            margin: 5vh auto 0 auto; /* Gives a nice breathing room at the top */
+            max-width: 1400px; 
             opacity: 0; 
             z-index: 10; 
         }
 
-        /* THE FIX: Made the image a squishy sponge */
+        /* THE FIX: Proportional shrinking image */
         .grandma-img {
-            flex: 1 1 50%; 
-            max-width: 1100px; 
-            width: 100%;
+            flex: 0 1 55%; /* Safely takes up 55% of the space and is allowed to shrink */
+            max-width: 100%;
+            height: auto; /* This forces the photo to shrink proportionally! */
             border-radius: 4px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
         }
 
-        /* THE FIX: Made the text a squishy sponge with a safety bumper */
+        /* THE FIX: Dedicated text area */
         .text-content {
-            flex: 1 1 45%; 
-            padding-right: 30px; /* Invisible bumper prevents cutting off */
-            margin-top: 15vh; 
-            min-height: 350px; 
+            flex: 0 1 42%; /* Safely takes up 42% of the space */
+            padding-right: 0; 
+            margin-top: 0; 
         }
 
+        /* THE MAGIC TRICK: Fluid Typography */
         .placeholder-text {
             font-family: var(--font-text);
-            font-size: 28px;
+            /* Font size will smoothly scale with screen width (min 16px, max 28px) */
+            font-size: clamp(16px, 1.8vw, 28px); 
             line-height: 1.6;
             color: var(--color-text);
             opacity: 1; 
