@@ -80,10 +80,10 @@
         .row-left { flex-direction: row; }
         .row-right { flex-direction: row-reverse; }
 
-        /* --- LAYER 3: RICE FIELDS --- */
+        /* --- LAYER 3: RICE FIELDS (Moved down ~3cm) --- */
         .deco-asset.field-slide {
             position: absolute;
-            bottom: -14%; 
+            bottom: -22%; 
             width: 90vw; 
             z-index: 20; 
             opacity: 0;
@@ -94,11 +94,11 @@
         .slide-from-right { right: calc(-50vw + 50%); transform: translateX(50vw); }
         .slide-from-left { left: calc(-50vw + 50%); transform: translateX(-50vw); }
 
-        /* --- LAYER 2: RICE STALKS (10% Bigger, Moved Up 3cm, with Continuous Sway) --- */
+        /* --- LAYER 2: RICE STALKS (Moved down ~3cm) --- */
         .deco-asset.stalk-grow {
             position: absolute;
-            bottom: -2%; /* Moved up roughly 3cm from -10% */
-            height: 55vh; /* 10% larger than previous 50vh */
+            bottom: -10%; 
+            height: 55vh; 
             z-index: 30; 
             opacity: 0;
             pointer-events: none;
@@ -122,7 +122,6 @@
         }
         .sway-active-left { animation: swayLeft 4s ease-in-out infinite alternate !important; opacity: 0.95 !important; }
         .sway-active-right { animation: swayRight 4s ease-in-out infinite alternate !important; opacity: 0.95 !important; }
-
 
         /* --- LAYER 4: IMAGE --- */
         .story-image-wrapper {
@@ -197,12 +196,12 @@
         .story-text.typing::after { content: '|'; animation: blink 1s step-end infinite; margin-left: 2px; color: var(--color-accent); }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- WINDING DOT TRAILS --- */
+        /* --- WINDING DOT TRAILS (Pulled UP into the ink wash) --- */
         .dot-trail-container {
             width: 100%;
             height: 180px; 
             position: relative;
-            margin-top: 40px; 
+            margin-top: -40px; /* Pulled up so the first dot anchors in the ink wash! */
             margin-bottom: 0px;
             z-index: 35;
         }
@@ -273,18 +272,16 @@
         .ending-container.reveal-ending .ending-text { opacity: 1; transform: translateY(0); }
 
         /* =========================================
-           RESPONSIVE RE-STACKING FOR IPADS (9-inch scaled perfectly)
+           RESPONSIVE RE-STACKING FOR IPADS
            ========================================= */
         @media screen and (max-width: 1024px) {
             .dot-trail-container { display: none; } 
             .timeline-row { min-height: auto; padding: 40px 0 100px 0; }
             .content-row { flex-direction: column !important; gap: 30px; }
             
-            /* Images and Text take full width */
             .story-image-wrapper { flex: 0 0 auto; width: 90%; max-width: 90%; z-index: 10; margin-top: 0;}
             .story-text-wrapper { flex: 0 0 auto; width: 95%; max-width: 95%; text-align: center; margin-top: 20px; z-index: 40;}
             
-            /* Proportional Scaling for Background Assets instead of hiding them! */
             .deco-asset.field-slide { width: 130vw; bottom: 0%; opacity: 0.6 !important; }
             .deco-asset.stalk-grow { height: 45vh; bottom: 0%; opacity: 0.5 !important; }
 
@@ -314,6 +311,7 @@
 
     <div class="timeline-container">
         
+        <!-- 1950s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1950" data-is-first="true">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -332,6 +330,7 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
+        <!-- 1970s CHAPTER -->
         <div class="timeline-row row-right" id="sec-1970">
             <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -350,6 +349,7 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
+        <!-- 1990s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1990">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -368,6 +368,7 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
+        <!-- 2000s CHAPTER -->
         <div class="timeline-row row-right" id="sec-2000">
             <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -386,6 +387,7 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
+        <!-- 2020s CHAPTER -->
         <div class="timeline-row row-left" id="sec-2020">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -399,6 +401,7 @@
             </div>
         </div>
 
+        <!-- THE GLORIOUS ENDING -->
         <div class="ending-container" id="sec-ending">
             <img src="images/footer.png" class="sunrise-img" alt="Footer Ink Wash" onerror="this.src='images/footer-bg.jpg'">
             <h2 class="ending-text">Legacy Shared</h2>
@@ -444,7 +447,6 @@
                 setTimeout(() => {
                     if(stalk) {
                         stalk.classList.add('reveal-stalk');
-                        // Activates the continuous swaying animation after the stalk has grown in
                         setTimeout(() => {
                             if(stalk.classList.contains('stalk-grow-left')) stalk.classList.add('sway-active-left');
                             if(stalk.classList.contains('stalk-grow-right')) stalk.classList.add('sway-active-right');
