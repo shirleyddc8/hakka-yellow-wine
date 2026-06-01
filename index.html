@@ -496,6 +496,19 @@
             transform: translateY(-5px);
         }
 
+        .custom-google-icon {
+            width: 45px; 
+            height: 45px;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 50%; /* This rounds the corners just in case your image has a white background square */
+        }
+
+.custom-google-icon:hover {
+    transform: translateY(-5px);
+}
+
         /* --- Keyframes --- */
         @keyframes fadeIn {
             0% { opacity: 0; }
@@ -689,7 +702,7 @@
             <div class="footer-social">
                 <i class="fa-brands fa-square-facebook"></i>
                 <i class="fa-brands fa-square-instagram"></i>
-                <i class="fa-brands fa-google"></i>
+                <img src="images/google.jpg" alt="Google" class="custom-google-icon">
             </div>
         </div>
     </footer>
