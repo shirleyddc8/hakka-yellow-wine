@@ -52,12 +52,80 @@
         .top-nav a { text-decoration: none; color: var(--color-accent); font-family: var(--font-nav); font-size: clamp(16px, 1.5vw, 24px); font-weight: 700; transition: opacity 0.3s ease; }
         .top-nav a:hover, .top-nav a.active { opacity: 0.7; }
 
+        /* --- NEW STORY INTRO SECTION --- */
+        .story-intro-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            margin: 120px auto 80px auto; /* Added top margin to clear the fixed nav */
+            padding-top: 20px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .intro-hero-img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1.5s ease forwards 0.5s; 
+        }
+
+        .intro-main-title {
+            font-family: var(--font-nav);
+            color: var(--color-accent);
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1.5s ease forwards 1s;
+        }
+
+        .intro-paragraph {
+            font-family: var(--font-text);
+            font-size: clamp(18px, 1.6vw, 24px);
+            line-height: 1.8;
+            color: var(--color-text);
+            font-style: italic;
+            opacity: 0;
+            animation: dissolveIn 2.5s ease forwards 1.5s; 
+        }
+
+        .intro-paragraph p {
+            margin-bottom: 20px;
+        }
+
+        .bridge-title {
+            font-family: var(--font-nav);
+            color: var(--color-accent);
+            font-size: clamp(28px, 3vw, 40px);
+            margin-top: 80px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: dissolveIn 2.5s ease forwards 2.2s;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes dissolveIn {
+            to { opacity: 1; }
+        }
+
         /* --- THE SCROLLABLE TIMELINE WRAPPER --- */
         .timeline-container {
             width: 100%;
             max-width: 1500px;
             margin: 0 auto;
-            padding: 120px 20px 0 20px;
+            padding: 0 20px 0 20px; /* Reduced top padding since the intro handles it now */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -80,7 +148,7 @@
         .row-left { flex-direction: row; }
         .row-right { flex-direction: row-reverse; }
 
-        /* --- LAYER 3: RICE FIELDS (Moved lower by 3cm) --- */
+        /* --- LAYER 3: RICE FIELDS --- */
         .deco-asset.field-slide {
             position: absolute;
             bottom: -25%; 
@@ -94,7 +162,7 @@
         .slide-from-right { right: calc(-50vw + 50%); transform: translateX(50vw); }
         .slide-from-left { left: calc(-50vw + 50%); transform: translateX(-50vw); }
 
-        /* --- LAYER 2: RICE STALKS (Moved lower by 3cm to match fields) --- */
+        /* --- LAYER 2: RICE STALKS --- */
         .deco-asset.stalk-grow {
             position: absolute;
             bottom: -13%; 
@@ -201,7 +269,7 @@
             width: 100%;
             height: 180px; 
             position: relative;
-            margin-top: -60px; /* Pulled further up to guarantee exact overlap on the field's edge */
+            margin-top: -60px; 
             margin-bottom: 0px;
             z-index: 35;
         }
@@ -224,30 +292,33 @@
         .d3 { width: 24px; height: 24px; }
         .d4 { width: 20px; height: 20px; }
         .d5 { width: 16px; height: 16px; }
+        .d6 { width: 12px; height: 12px; }
 
-        /* UNIQUE PATH 1: 1950s (Forced lower below the field and shifted left) */
+        /* UNIQUE PATH 1: 1950s */
         .path-1 {
-            margin-top: 90px !important; /* The !important tag forces it to ignore the old -60px rule */
-            height: 220px; /* Makes the path taller so the dots stretch out smoothly */
+            margin-top: 90px !important; 
+            height: 220px; 
         }
         .path-1 .d1 { top: 0%; left: 30%; } 
         .path-1 .d2 { top: 20%; left: 34%; }
         .path-1 .d3 { top: 40%; left: 38%; }
         .path-1 .d4 { top: 60%; left: 42%; }
         .path-1 .d5 { top: 80%; left: 44%; }
+        .path-1 .d6 { top: 100%; left: 42%; }
 
-        /* UNIQUE PATH 2: 1970s (Starts slightly right, snakes deeply to the left) */
+        /* UNIQUE PATH 2: 1970s */
         .path-2 {
-            margin-top: 90px !important; /* Forces it down out of the rice field */
-            height: 220px; /* Gives the dots room to stretch out smoothly */
+            margin-top: 90px !important; 
+            height: 220px; 
         }
         .path-2 .d1 { top: 0%; left: 70%; }
-        .path-2 .d2 { top: 30%; left: 72%; }
-        .path-2 .d3 { top: 35%; left: 63%; }
+        .path-2 .d2 { top: 20%; left: 72%; }
+        .path-2 .d3 { top: 40%; left: 67%; }
         .path-2 .d4 { top: 60%; left: 60%; }
         .path-2 .d5 { top: 80%; left: 56%; }
+        .path-2 .d6 { top: 100%; left: 60%; }
         
-        /* UNIQUE PATH 3: 1990s (Starts center-left, wide arc to the right) */
+        /* UNIQUE PATH 3: 1990s */
         .path-3 .d1 { top: 0%; left: 45%; }
         .path-3 .d2 { top: 20%; left: 42%; }
         .path-3 .d3 { top: 40%; left: 48%; }
@@ -255,7 +326,7 @@
         .path-3 .d5 { top: 80%; left: 58%; }
         .path-3 .d6 { top: 100%; left: 54%; }
 
-        /* UNIQUE PATH 4: 2000s (Starts center, tight zig-zag down) */
+        /* UNIQUE PATH 4: 2000s */
         .path-4 .d1 { top: 0%; left: 52%; }
         .path-4 .d2 { top: 20%; left: 48%; }
         .path-4 .d3 { top: 40%; left: 54%; }
@@ -339,9 +410,21 @@
         </ul>
     </nav>
 
+    <div class="story-intro-section">
+        <img src="images/making-process.jpg" alt="Brewing Process" class="intro-hero-img">
+        
+        <h1 class="intro-main-title">A Journey Through Time: The Story of Our Liquid Gold</h1>
+        
+        <div class="intro-paragraph">
+            <p>Our Hakka Yellow Wine (Huangjiu) is not merely a commercial product; it is a living piece of culinary history, a powerful wellness tonic, and a beautiful testament to a family’s dedication to cultural heritage.</p>
+            <p>While our traditional craft shares the ancient, warming medicinal principles found in the classic Chinese medical text, the Shang Han Lun, our direct family recipe follows a personal, generation-spanning journey through time. Explore how this liquid gold travelled from a grandmother's kitchen into the modern digital age.</p>
+        </div>
+
+        <h2 class="bridge-title">Our Humble Beginning</h2>
+    </div>
+
     <div class="timeline-container">
         
-        <!-- 1950s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1950" data-is-first="true">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -351,7 +434,7 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">1950s: The Origin</h2>
-                <div class="story-text" data-text="[Placement text for the 1950s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
+                <div class="story-text" data-text="The story begins with Mich's maternal grandmother. In an era where family meals were the emotional anchor of the home, she perfected a traditional Hakka yellow wine recipe. There were no written manuals, standard measurement booklets, or chemical shortcuts. The entire craft was passed down dynamically through memory, sight, touch, and scent. Every batch was slowly fermented from premium glutinous rice to naturally break down proteins into rich, complex amino acids, creating a highly umami flavour profile that became a deeply guarded family treasure."></div>
             </div>
         </div>
 
@@ -360,7 +443,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 1970s CHAPTER -->
         <div class="timeline-row row-right" id="sec-1970">
             <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -370,7 +452,7 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">1970s: Preservation</h2>
-                <div class="story-text" data-text="[Placement text for the 1970s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
+                <div class="story-text" data-text="By the 1970s, the duty of keeping this cultural flame alive passed to the next generation. At the tender age of just 5 or 6 years old, Mich's mother stood by her own mother's side, absorbing every detail of the meticulous brewing process through continuous practice. Over the decades, while modern food production shifted toward industrial factories, preservatives, and heavily salted commercial cooking wines, she fiercely protected the recipe. She followed it strictly without a single modern alteration, preserving a completely natural, clean standard of purity."></div>
             </div>
         </div>
 
@@ -379,7 +461,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 1990s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1990">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -389,7 +470,7 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">1990s: Learning & Connection</h2>
-                <div class="story-text" data-text="[Placement text for the 1990s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
+                <div class="story-text" data-text="During the 1990s, the true health and restorative power of this family wine was put to the ultimate test. In Hakka culture, yellow rice wine is revered in Traditional Chinese Medicine (TCM) as an indispensable warming tonic to boost internal blood circulation, dispel bodily cold, and optimize uterine health during postpartum recovery. After bringing five daughters into the world, Mich's mother drank a bottle of her own brewed wine every single day during her confinement periods. Today, she stands as living proof of its vital benefits-remaining healthy, strong, and vibrant."></div>
             </div>
         </div>
 
@@ -398,7 +479,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 2000s CHAPTER -->
         <div class="timeline-row row-right" id="sec-2000">
             <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -408,7 +488,7 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">2000s: Modern Continuation</h2>
-                <div class="story-text" data-text="[Placement text for the 2000s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
+                <div class="story-text" data-text="As the new millennium arrived, Mich grew up watching her mother brew this beautiful amber liquid with uncompromised patience. She watched her mother respect ancient parameters-including strict traditional wisdom, such as ensuring the brewing process is never conducted when any woman in the household is menstruating, protecting the delicate fermentation environment. Mich realized that true, small-batch Huangjiu was becoming incredibly scarce in modern Singapore. Fewer people were making it by hand, and a massive piece of their family's Chinese culture risked being lost to time."></div>
             </div>
         </div>
 
@@ -417,7 +497,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 2020s CHAPTER -->
         <div class="timeline-row row-left" id="sec-2020">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -427,11 +506,10 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">2020s: Heritage Meets Modern Table</h2>
-                <div class="story-text" data-text="[Placement text for the 2020s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
+                <div class="story-text" data-text="Today, the journey comes full circle through a dedicated mother-daughter partnership. Mich steps forward to handle the modern brand vision, online outreach, and quality packaging, while her mother continues to manage the sacred, 40-day natural slow fermentation process. Together, they are making this traditional culinary asset available to the public. Whether you are splashing it into a hot wok to create an authentic Red-Braised Pork Belly (Hongshao Rou) or drinking a smooth glass to warm your body, you are actively helping us keep an ancient heritage alive."></div>
             </div>
         </div>
 
-        <!-- THE GLORIOUS ENDING -->
         <div class="ending-container" id="sec-ending">
             <img src="images/footer.png" class="sunrise-img" alt="Footer Ink Wash" onerror="this.src='images/footer-bg.jpg'">
             <h2 class="ending-text">Legacy Shared</h2>
@@ -514,6 +592,7 @@
                 }, 4000);
             }
 
+            // Kept exactly as is: Triggers the first row after the initial delay
             setTimeout(() => {
                 const firstRow = document.querySelector('#sec-1950');
                 if (firstRow) playTimelineSequence(firstRow);
