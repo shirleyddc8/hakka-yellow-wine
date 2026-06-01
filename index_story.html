@@ -66,29 +66,58 @@
             position: relative;
         }
 
-        .intro-hero-img {
+       /* --- DROPLET RIPPLE EFFECT --- */
+        .hero-ripple-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
-            max-width: 850px; 
+            max-width: 850px;
             margin-bottom: 50px;
-            opacity: 0;
-            animation: rippleReveal 2s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.5s; 
         }
 
-        /* PUT IT RIGHT HERE! */
-        @keyframes rippleReveal {
-            0% { 
-                opacity: 0; 
-                transform: scale(0.8);
-                clip-path: circle(0% at 50% 50%); 
-            }
-            50% { 
-                opacity: 1; 
-            }
-            100% { 
-                opacity: 1; 
-                transform: scale(1);
-                clip-path: circle(100% at 50% 50%); 
-            }
+        .intro-hero-img {
+            width: 100%;
+            z-index: 2;
+            position: relative;
+            opacity: 0;
+            /* Uses a bouncy bezier curve to simulate the droplet hitting the surface! */
+            animation: dropletHit 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.5s; 
+        }
+
+        /* The concentric expanding water rings */
+        .water-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%; 
+            aspect-ratio: 1 / 1; /* Keeps them perfectly circular */
+            border-radius: 50%;
+            border: 4px solid rgba(195, 139, 37, 0.6); /* Golden wine color */
+            box-shadow: 0 0 20px rgba(195, 139, 37, 0.3), inset 0 0 20px rgba(195, 139, 37, 0.3);
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Staggering the rings so one fires after the other */
+        .w-ring-1 { animation: waterRippleExpand 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.7s; }
+        .w-ring-2 { animation: waterRippleExpand 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 1.1s; }
+
+        /* The image falling and splashing */
+        @keyframes dropletHit {
+            0% { opacity: 0; transform: scale(0.8) translateY(-30px); filter: blur(8px); }
+            40% { opacity: 1; transform: scale(1.02) translateY(0); filter: blur(0px); }
+            70% { transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* The physical water rings shooting outward */
+        @keyframes waterRippleExpand {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; border-width: 6px; }
+            100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; border-width: 0px; }
         }
 
         .intro-main-title {
@@ -189,9 +218,9 @@
         .stalk-grow-left { left: calc(-50vw + 50%); transform-origin: bottom left; transform: translateY(30%) rotate(-5deg); }
         .stalk-grow-right { right: calc(-50vw + 50%); transform-origin: bottom right; transform: translateY(30%) rotate(5deg); }
 
-        /* Active Reveal States */
-        .reveal-field { opacity: 1 !important; transform: translateX(0) !important; }
-        .reveal-stalk { opacity: 0.95 !important; transform: translateY(0) rotate(0deg) !important; }
+        /* Active Reveal States (Removed !important tags) */
+        .deco-asset.reveal-field { opacity: 1; transform: translateX(0); }
+        .deco-asset.reveal-stalk { opacity: 0.95; transform: translateY(0) rotate(0deg); }
 
         /* Continuous Sway Animations */
         @keyframes swayLeft {
@@ -202,8 +231,8 @@
             0% { transform: translateY(0) rotate(0deg); }
             100% { transform: translateY(0) rotate(4deg); }
         }
-        .sway-active-left { animation: swayLeft 4s ease-in-out infinite alternate !important; opacity: 0.95 !important; }
-        .sway-active-right { animation: swayRight 4s ease-in-out infinite alternate !important; opacity: 0.95 !important; }
+        .deco-asset.sway-active-left { animation: swayLeft 4s ease-in-out infinite alternate; }
+        .deco-asset.sway-active-right { animation: swayRight 4s ease-in-out infinite alternate; }
 
         /* --- LAYER 4: IMAGE --- */
         .story-image-wrapper {
@@ -248,9 +277,14 @@
             display: flex;
             flex-direction: column;
             align-self: flex-start; 
-            margin-top: -60px; /* Pulled up higher so it stays away from the grass! */
+            margin-top: -60px; 
             padding: 0 20px;
             z-index: 40; 
+        }
+
+        /* This must sit on its own, outside the brackets above! */
+        #sec-1970 .story-text-wrapper {
+            margin-top: -95px; 
         }
 
         .section-header {
@@ -258,7 +292,6 @@
             color: var(--color-accent);
             font-size: clamp(24px, 2.5vw, 36px);
             margin-bottom: 15px;
-            text-transform: uppercase;
             opacity: 0;
             transform: translateY(15px);
             transition: all 0.8s ease;
@@ -320,14 +353,14 @@
 
         /* UNIQUE PATH 2: 1970s */
         .path-2 {
-            margin-top: 120px !important; /* Pushed down more to avoid the lowered field */
+            margin-top: 120px !important; 
             height: 220px; 
         }
         .path-2 .d1 { top: 0%; left: 70%; }
-        .path-2 .d2 { top: 30%; left: 72%; }
-        .path-2 .d3 { top: 35%; left: 63%; }
-        .path-2 .d4 { top: 60%; left: 60%; }
-        .path-2 .d5 { top: 80%; left: 56%; }
+        .path-2 .d2 { top: 20%; left: 66%; } /* Fixed: Smoothed out the curve! */
+        .path-2 .d3 { top: 40%; left: 62%; } /* Fixed: Smoothed out the curve! */
+        .path-2 .d4 { top: 60%; left: 58%; }
+        .path-2 .d5 { top: 80%; left: 54%; }
         
         /* UNIQUE PATH 3: 1990s */
         .path-3 .d1 { top: 0%; left: 45%; }
@@ -420,7 +453,12 @@
     </nav>
 
     <div class="story-intro-section">
-        <img src="images/making-process.png" alt="Brewing Process" class="intro-hero-img">
+        
+        <div class="hero-ripple-container">
+            <div class="water-ring w-ring-1"></div>
+            <div class="water-ring w-ring-2"></div>
+            <img src="images/making-process.png" alt="Brewing Process" class="intro-hero-img">
+        </div>
         
         <h1 class="intro-main-title">A Journey Through Time: The Story of Our Liquid Gold</h1>
         
@@ -442,7 +480,7 @@
                 <img src="images/1950s.jpg" class="story-img filter-1950" alt="1950s History">
             </div>
             <div class="story-text-wrapper">
-                <h2 class="section-header">1950s: The Origin</h2>
+                <h2 class="section-header">1950s: THE ORIGIN</h2>
                 <div class="story-text" data-text="The story begins with Mich's maternal grandmother. In an era where family meals were the emotional anchor of the home, she perfected a traditional Hakka yellow wine recipe. There were no written manuals, standard measurement booklets, or chemical shortcuts. The entire craft was passed down dynamically through memory, sight, touch, and scent. Every batch was slowly fermented from premium glutinous rice to naturally break down proteins into rich, complex amino acids, creating a highly umami flavour profile that became a deeply guarded family treasure."></div>
             </div>
         </div>
@@ -460,7 +498,7 @@
                 <img src="images/1970s.jpg" class="story-img" alt="1970s History">
             </div>
             <div class="story-text-wrapper">
-                <h2 class="section-header">1970s: Preservation</h2>
+               <h2 class="section-header">1970s: PRESERVATION</h2>
                 <div class="story-text" data-text="By the 1970s, the duty of keeping this cultural flame alive passed to the next generation. At the tender age of just 5 or 6 years old, Mich's mother stood by her own mother's side, absorbing every detail of the meticulous brewing process through continuous practice. Over the decades, while modern food production shifted toward industrial factories, preservatives, and heavily salted commercial cooking wines, she fiercely protected the recipe. She followed it strictly without a single modern alteration, preserving a completely natural, clean standard of purity."></div>
             </div>
         </div>
@@ -478,7 +516,7 @@
                 <img src="images/1990s.jpg" class="story-img filter-1990" alt="1990s History">
             </div>
             <div class="story-text-wrapper">
-                <h2 class="section-header">1990s: Learning & Connection</h2>
+                <h2 class="section-header">1990s: LEARNING & CONNECTION</h2>
                 <div class="story-text" data-text="During the 1990s, the true health and restorative power of this family wine was put to the ultimate test. In Hakka culture, yellow rice wine is revered in Traditional Chinese Medicine (TCM) as an indispensable warming tonic to boost internal blood circulation, dispel bodily cold, and optimize uterine health during postpartum recovery. After bringing five daughters into the world, Mich's mother drank a bottle of her own brewed wine every single day during her confinement periods. Today, she stands as living proof of its vital benefits-remaining healthy, strong, and vibrant."></div>
             </div>
         </div>
@@ -496,7 +534,7 @@
                 <img src="images/2000s.jpg" class="story-img" alt="2000s History">
             </div>
             <div class="story-text-wrapper">
-                <h2 class="section-header">2000s: Modern Continuation</h2>
+                <h2 class="section-header">2000s: MODERN CONTINUATION</h2>
                 <div class="story-text" data-text="As the new millennium arrived, Mich grew up watching her mother brew this beautiful amber liquid with uncompromised patience. She watched her mother respect ancient parameters-including strict traditional wisdom, such as ensuring the brewing process is never conducted when any woman in the household is menstruating, protecting the delicate fermentation environment. Mich realized that true, small-batch Huangjiu was becoming incredibly scarce in modern Singapore. Fewer people were making it by hand, and a massive piece of their family's Chinese culture risked being lost to time."></div>
             </div>
         </div>
@@ -514,7 +552,7 @@
                 <img src="images/2020s.jpg" class="story-img" alt="2020s History">
             </div>
             <div class="story-text-wrapper">
-                <h2 class="section-header">2020s: Heritage Meets Modern Table</h2>
+                <h2 class="section-header">2020s: HERITAGE MEETS MODERN TABLE</h2>
                 <div class="story-text" data-text="Today, the journey comes full circle through a dedicated mother-daughter partnership. Mich steps forward to handle the modern brand vision, online outreach, and quality packaging, while her mother continues to manage the sacred, 40-day natural slow fermentation process. Together, they are making this traditional culinary asset available to the public. Whether you are splashing it into a hot wok to create an authentic Red-Braised Pork Belly (Hongshao Rou) or drinking a smooth glass to warm your body, you are actively helping us keep an ancient heritage alive."></div>
             </div>
         </div>
