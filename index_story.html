@@ -74,38 +74,38 @@
             z-index: 10;
             padding: 80px 0;
             min-height: 650px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .row-left { flex-direction: row; }
         .row-right { flex-direction: row-reverse; }
 
-        /* --- LAYER 3: RICE FIELDS (Lowered further down) --- */
+        /* --- LAYER 3: RICE FIELDS (10% Smaller & Custom Slide Directions) --- */
         .deco-asset.field-slide {
             position: absolute;
-            bottom: -25%; /* Pushed down an extra 10% to keep clear of text */
-            width: 100vw; 
-            left: calc(-50vw + 50%); 
+            bottom: -22%; 
+            width: 90vw; /* 10% smaller */
             z-index: 20; 
             opacity: 0;
             pointer-events: none;
             transition: all 2.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
-        .field-slide-left { transform: translateX(-15vw); }
-        .field-slide-right { transform: translateX(15vw); }
+        /* Flushed to the Right Edge, sliding IN from the Right */
+        .slide-from-right { right: calc(-50vw + 50%); transform: translateX(50vw); }
+        /* Flushed to the Left Edge, sliding IN from the Left */
+        .slide-from-left { left: calc(-50vw + 50%); transform: translateX(-50vw); }
 
-        /* --- LAYER 2: RICE STALKS (10% Smaller & Flushed to Edges) --- */
+        /* --- LAYER 2: RICE STALKS --- */
         .deco-asset.stalk-grow {
             position: absolute;
-            bottom: -25%; /* Matches the lowered field */
-            height: 80vh; /* Reduced from 90vh */
+            bottom: -25%; 
+            height: 80vh; 
             z-index: 30; 
             opacity: 0;
             pointer-events: none;
             transition: all 2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        /* Anchored directly to the left/right corners so they hug the edges */
         .stalk-grow-left { left: calc(-50vw + 50%); transform-origin: bottom left; transform: translateY(30%) rotate(-3deg); }
         .stalk-grow-right { right: calc(-50vw + 50%); transform-origin: bottom right; transform: translateY(30%) rotate(3deg); }
 
@@ -113,7 +113,7 @@
         .reveal-field { opacity: 1 !important; transform: translateX(0) !important; }
         .reveal-stalk { opacity: 0.95 !important; transform: translateY(0) rotate(0deg) !important; }
 
-        /* --- LAYER 4: IMAGE (Pushed Higher Up) --- */
+        /* --- LAYER 4: IMAGE (Safe Behind Fields) --- */
         .story-image-wrapper {
             position: relative;
             flex: 0 0 56%; 
@@ -124,8 +124,8 @@
             opacity: 0;
             transform: scale(0.95);
             transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            align-self: flex-start; /* Pushes image to the very top */
-            margin-top: -60px; /* Lifts image visibly higher than the text */
+            align-self: flex-start; 
+            margin-top: -60px; 
         }
         
         .story-image-wrapper.reveal-blob {
@@ -148,7 +148,7 @@
         .filter-1950 { filter: sepia(0.6) grayscale(0.4) contrast(1.2); }
         .filter-1990 { filter: saturate(1.1) contrast(1.05); }
 
-        /* --- LAYER 1: TEXT AREA (Maintains current position) --- */
+        /* --- LAYER 1: TEXT AREA --- */
         .story-text-wrapper {
             position: relative;
             flex: 0 0 40%;
@@ -190,7 +190,8 @@
             width: 100%;
             height: 280px;
             position: relative;
-            margin: -20px 0;
+            margin-top: 100px; /* Pushed significantly down so Dot 1 spawns AT THE BOTTOM of the rice field! */
+            margin-bottom: 0px;
             z-index: 35;
         }
 
@@ -297,7 +298,8 @@
         
         <!-- 1950s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1950" data-is-first="true">
-            <img src="images/rice-field-r.png" class="deco-asset field-slide field-slide-left" alt="Rice Field">
+            <!-- 1950s: Slides from Right to Left -->
+            <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
             
             <div class="story-image-wrapper">
@@ -316,7 +318,8 @@
 
         <!-- 1970s CHAPTER -->
         <div class="timeline-row row-right" id="sec-1970">
-            <img src="images/rice-field.png" class="deco-asset field-slide field-slide-right" alt="Rice Field">
+            <!-- 1970s: Slides from Left to Right -->
+            <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
             
             <div class="story-image-wrapper">
@@ -335,7 +338,8 @@
 
         <!-- 1990s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1990">
-            <img src="images/rice-field-r.png" class="deco-asset field-slide field-slide-left" alt="Rice Field">
+            <!-- 1990s: Slides from Right to Left -->
+            <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
 
             <div class="story-image-wrapper">
@@ -354,7 +358,8 @@
 
         <!-- 2000s CHAPTER -->
         <div class="timeline-row row-right" id="sec-2000">
-            <img src="images/rice-field.png" class="deco-asset field-slide field-slide-right" alt="Rice Field">
+            <!-- 2000s: Slides from Left to Right -->
+            <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
 
             <div class="story-image-wrapper">
@@ -363,6 +368,26 @@
             <div class="story-text-wrapper">
                 <h2 class="section-header">2000s: Modern Continuation</h2>
                 <div class="story-text" data-text="Under her mother's guidance in the family kitchen, Mich learned how this extraordinary flavor enhancer completely transforms ordinary home-cooked ingredients into restaurant-quality heritage masterpieces, releasing an aromatic vapor that defines true Wok Hei."></div>
+            </div>
+        </div>
+
+        <div class="dot-trail-container trail-reverse">
+            <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
+            <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
+        </div>
+
+        <!-- 2020s CHAPTER (The Final Chapter) -->
+        <div class="timeline-row row-left" id="sec-2020">
+            <!-- 2020s: Slides from Right to Left -->
+            <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
+            <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
+
+            <div class="story-image-wrapper">
+                <img src="images/2020s.jpg" class="story-img" alt="2020s History">
+            </div>
+            <div class="story-text-wrapper">
+                <h2 class="section-header">2020s: Heritage Meets Modern Table</h2>
+                <div class="story-text" data-text="Brought to life by a dedicated intergenerational partnership – Mich, who steers our business vision, and her mother, our Master Brewer - we are fiercely dedicated to protecting a vanishing cultural craft."></div>
             </div>
         </div>
 
@@ -409,7 +434,7 @@
                 const textNode = row.querySelector('.story-text');
                 const trailContainer = row.nextElementSibling;
                 
-                // 1. 0s: Rice field slides in 
+                // 1. 0s: Rice field slides in perfectly from the right or left
                 if(field) field.classList.add('reveal-field');
                 
                 // 2. 1.5s later: Rice stalk grows
@@ -417,10 +442,9 @@
                     if(stalk) stalk.classList.add('reveal-stalk');
                 }, 1500);
 
-                // 3. 1.0s later (2.5s total): Image blob reveals 
+                // 3. 1.0s later (2.5s total): Image blob reveals safely behind scenery
                 setTimeout(() => {
                     if(imgWrap) {
-                        // The dynamic timestamp forces the blob to run every single time
                         const freshMask = `url('images/black-ink.webp?v=${new Date().getTime()}')`;
                         imgWrap.style.webkitMaskImage = freshMask;
                         imgWrap.style.maskImage = freshMask;
@@ -428,13 +452,13 @@
                     }
                 }, 2500);
 
-                // 4. 1.5s later (4.0s total): Text types in front
+                // 4. 1.5s later (4.0s total): Text types out front
                 setTimeout(() => {
                     if(header) header.classList.add('reveal-text');
                     if(textNode) {
                         textNode.classList.add('reveal-text');
                         typeWriter(textNode, () => {
-                            // 5. Exactly 3 seconds after text finishes, reveal the FIRST dot
+                            // 5. Exactly 3 seconds after text finishes, reveal the FIRST dot right under the field!
                             setTimeout(() => {
                                 if (trailContainer && trailContainer.classList.contains('dot-trail-container')) {
                                     const dots = trailContainer.querySelectorAll('.trail-dot');
