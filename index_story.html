@@ -227,9 +227,8 @@
             margin-top: -60px; 
         }
 
-        /* Specifically target 1950s & 1990s images: Shifted left by 2cm (-60px) and kept large */
-        #sec-1950 .story-image-wrapper,
-        #sec-1990 .story-image-wrapper {
+        /* Independent Image Height/Margin controls */
+        #sec-1950 .story-image-wrapper {
             flex: 0 0 58%; 
             max-width: 58%;
             margin-top: -110px; 
@@ -238,6 +237,27 @@
         
         #sec-1970 .story-image-wrapper {
             margin-top: -90px; 
+        }
+        
+        #sec-1990 .story-image-wrapper {
+            flex: 0 0 58%; 
+            max-width: 58%;
+            margin-top: -110px; 
+            margin-left: -60px; 
+        }
+
+        #sec-2000 .story-image-wrapper {
+            flex: 0 0 58%; 
+            max-width: 58%;
+            margin-top: -140px; /* Shifted up 1 line */
+            margin-right: -60px; 
+        }
+
+        #sec-2020 .story-image-wrapper {
+            flex: 0 0 58%; 
+            max-width: 58%;
+            margin-top: -170px; /* Shifted up 2 lines */
+            margin-left: -60px; 
         }
         
         .story-image-wrapper.reveal-blob {
@@ -273,19 +293,38 @@
             z-index: 40; 
         }
 
-        /* Specifically adjust 1950s & 1990s text areas: Much more width, shifted left to follow image */
-        #sec-1950 .story-text-wrapper,
-        #sec-1990 .story-text-wrapper {
+        /* Independent Text Box Controls */
+        #sec-1950 .story-text-wrapper {
             flex: 0 0 42%;
             max-width: 42%;
-            margin-top: -95px; 
+            margin-top: -125px; /* Shifted up 1 line */
             margin-left: -30px;
         }
 
-        /* Pulls text up by 1 line for the specific sections */
-        #sec-1970 .story-text-wrapper,
-        #sec-2000 .story-text-wrapper {
+        #sec-1970 .story-text-wrapper {
             margin-top: -95px; 
+        }
+
+        #sec-1990 .story-text-wrapper {
+            flex: 0 0 42%;
+            max-width: 42%;
+            margin-top: -155px; /* Shifted up 2 lines */
+            margin-left: -30px;
+        }
+
+        #sec-2000 .story-text-wrapper {
+            flex: 0 0 48%; /* Widened text box */
+            max-width: 48%;
+            margin-top: -125px; /* Shifted up 1 line */
+            margin-right: -30px;
+            margin-left: -60px; /* Pushed 2cm left */
+        }
+
+        #sec-2020 .story-text-wrapper {
+            flex: 0 0 42%;
+            max-width: 42%;
+            margin-top: -155px; /* Shifted up 2 lines */
+            margin-left: -30px;
         }
 
         .section-header {
@@ -361,11 +400,11 @@
         .path-2 .d2 { top: 30%; left: 68%; } 
         .path-2 .d3 { top: 60%; left: 65%; } 
         .path-2 .d4 { top: 72%; left: 61%; } 
-        .path-2 .d5 { top: 84%; left: 58%; } /* Pulled up closer to d4! */
+        .path-2 .d5 { top: 84%; left: 58%; }
         
         /* UNIQUE PATH 3: 1990s */
         .path-3 {
-            margin-top: 120px !important; 
+            margin-top: 200px !important; /* Shifted up 1cm */
             height: 220px;
         }
         .path-3 .d1 { top: 0%; left: 30%; } 
@@ -376,14 +415,14 @@
 
         /* UNIQUE PATH 4: 2000s */
         .path-4 {
-            margin-top: 120px !important; 
+            margin-top: 240px !important; 
             height: 220px;
         }
-        .path-4 .d1 { top: 0%; left: 50%; } 
-        .path-4 .d2 { top: 20%; left: 54%; } 
-        .path-4 .d3 { top: 40%; left: 58%; }
-        .path-4 .d4 { top: 60%; left: 56%; }
-        .path-4 .d5 { top: 80%; left: 54%; }
+        .path-4 .d1 { top: 0%; left: 62%; } /* Shifted right */
+        .path-4 .d2 { top: 20%; left: 66%; } /* Shifted right */
+        .path-4 .d3 { top: 40%; left: 70%; } /* Shifted right */
+        .path-4 .d4 { top: 60%; left: 68%; } /* Shifted right */
+        .path-4 .d5 { top: 80%; left: 66%; } /* Shifted right */
 
         /* --- GLORIOUS ENDING CONTAINER --- */
         .ending-container {
@@ -432,21 +471,23 @@
             .content-row { flex-direction: column !important; gap: 30px; }
             
             /* Specific overrides to prevent custom desktop margins from breaking mobile */
-            .story-image-wrapper, #sec-1950 .story-image-wrapper, #sec-1970 .story-image-wrapper, #sec-1990 .story-image-wrapper { 
+            .story-image-wrapper, #sec-1950 .story-image-wrapper, #sec-1970 .story-image-wrapper, #sec-1990 .story-image-wrapper, #sec-2000 .story-image-wrapper, #sec-2020 .story-image-wrapper { 
                 flex: 0 0 auto !important; 
                 width: 90% !important; 
                 max-width: 90% !important; 
                 z-index: 10; 
                 margin-top: 0 !important; 
                 margin-left: 0 !important;
+                margin-right: 0 !important;
             }
-            .story-text-wrapper, #sec-1950 .story-text-wrapper, #sec-1970 .story-text-wrapper, #sec-1990 .story-text-wrapper, #sec-2000 .story-text-wrapper { 
+            .story-text-wrapper, #sec-1950 .story-text-wrapper, #sec-1970 .story-text-wrapper, #sec-1990 .story-text-wrapper, #sec-2000 .story-text-wrapper, #sec-2020 .story-text-wrapper { 
                 flex: 0 0 auto !important; 
                 width: 95% !important; 
                 max-width: 95% !important; 
                 text-align: center; 
                 margin-top: 20px !important; 
                 margin-left: 0 !important;
+                margin-right: 0 !important;
                 z-index: 40;
             }
             
