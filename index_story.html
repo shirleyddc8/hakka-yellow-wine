@@ -73,7 +73,7 @@
             position: relative;
             z-index: 10;
             padding: 80px 0;
-            min-height: 650px;
+            min-height: clamp(500px, 60vh, 650px);
             margin-bottom: 20px;
         }
 
@@ -94,22 +94,35 @@
         .slide-from-right { right: calc(-50vw + 50%); transform: translateX(50vw); }
         .slide-from-left { left: calc(-50vw + 50%); transform: translateX(-50vw); }
 
-        /* --- LAYER 2: RICE STALKS (Moved up ~1cm to bottom: -10%) --- */
+        /* --- LAYER 2: RICE STALKS (10% Bigger, Moved Up 3cm, with Continuous Sway) --- */
         .deco-asset.stalk-grow {
             position: absolute;
-            bottom: -10%; 
-            height: 50vh; 
+            bottom: -2%; /* Moved up roughly 3cm from -10% */
+            height: 55vh; /* 10% larger than previous 50vh */
             z-index: 30; 
             opacity: 0;
             pointer-events: none;
             transition: all 2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .stalk-grow-left { left: calc(-50vw + 50%); transform-origin: bottom left; transform: translateY(30%) rotate(-3deg); }
-        .stalk-grow-right { right: calc(-50vw + 50%); transform-origin: bottom right; transform: translateY(30%) rotate(3deg); }
+        .stalk-grow-left { left: calc(-50vw + 50%); transform-origin: bottom left; transform: translateY(30%) rotate(-5deg); }
+        .stalk-grow-right { right: calc(-50vw + 50%); transform-origin: bottom right; transform: translateY(30%) rotate(5deg); }
 
         /* Active Reveal States */
         .reveal-field { opacity: 1 !important; transform: translateX(0) !important; }
         .reveal-stalk { opacity: 0.95 !important; transform: translateY(0) rotate(0deg) !important; }
+
+        /* Continuous Sway Animations (Activated via JS after reveal) */
+        @keyframes swayLeft {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(0) rotate(-4deg); }
+        }
+        @keyframes swayRight {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(0) rotate(4deg); }
+        }
+        .sway-active-left { animation: swayLeft 4s ease-in-out infinite alternate !important; opacity: 0.95 !important; }
+        .sway-active-right { animation: swayRight 4s ease-in-out infinite alternate !important; opacity: 0.95 !important; }
+
 
         /* --- LAYER 4: IMAGE --- */
         .story-image-wrapper {
@@ -178,6 +191,7 @@
             color: var(--color-text);
             font-style: italic;
             opacity: 0;
+            min-height: 150px;
         }
         .story-text.reveal-text { opacity: 1; }
         .story-text.typing::after { content: '|'; animation: blink 1s step-end infinite; margin-left: 2px; color: var(--color-accent); }
@@ -205,7 +219,7 @@
         
         .trail-dot.reveal-dot { opacity: 0.9; transform: scale(1); }
 
-        /* Evenly spaced percentages over the shorter container */
+        /* Sizes */
         .d1 { width: 34px; height: 34px; top: 0%; left: 50%; }
         .d2 { width: 28px; height: 28px; top: 20%; left: 53%; }
         .d3 { width: 24px; height: 24px; top: 40%; left: 55%; }
@@ -259,15 +273,21 @@
         .ending-container.reveal-ending .ending-text { opacity: 1; transform: translateY(0); }
 
         /* =========================================
-           RESPONSIVE RE-STACKING FOR IPADS
+           RESPONSIVE RE-STACKING FOR IPADS (9-inch scaled perfectly)
            ========================================= */
         @media screen and (max-width: 1024px) {
             .dot-trail-container { display: none; } 
-            .timeline-row { min-height: auto; padding: 40px 0;}
-            .content-row { flex-direction: column !important; gap: 20px; }
+            .timeline-row { min-height: auto; padding: 40px 0 100px 0; }
+            .content-row { flex-direction: column !important; gap: 30px; }
+            
+            /* Images and Text take full width */
             .story-image-wrapper { flex: 0 0 auto; width: 90%; max-width: 90%; z-index: 10; margin-top: 0;}
             .story-text-wrapper { flex: 0 0 auto; width: 95%; max-width: 95%; text-align: center; margin-top: 20px; z-index: 40;}
-            .deco-asset { display: none; } 
+            
+            /* Proportional Scaling for Background Assets instead of hiding them! */
+            .deco-asset.field-slide { width: 130vw; bottom: 0%; opacity: 0.6 !important; }
+            .deco-asset.stalk-grow { height: 45vh; bottom: 0%; opacity: 0.5 !important; }
+
             .ending-container { height: 30vh; }
         }
     </style>
@@ -294,7 +314,6 @@
 
     <div class="timeline-container">
         
-        <!-- 1950s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1950" data-is-first="true">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -304,7 +323,7 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">1950s: The Origin</h2>
-                <div class="story-text" data-text="Built upon a sacred ancestral recipe, our Hakka Yellow Wine is a living piece of family history. Originating in Mich's great-grandmother's humble kitchen in the 1950s, this golden elixir has been passed down from mother to daughter—fiercely protected, and brewed with love without a single modern alteration."></div>
+                <div class="story-text" data-text="[Placement text for the 1950s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
             </div>
         </div>
 
@@ -313,7 +332,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 1970s CHAPTER -->
         <div class="timeline-row row-right" id="sec-1970">
             <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -323,7 +341,7 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">1970s: Preservation</h2>
-                <div class="story-text" data-text="In keeping with ancient brewing wisdom passed down by Mich's maternal grandmother, we even ensure that the brewing process is never conducted when any woman in the household is menstruating, preserving the ultimate purity and spiritual environment of the fermentation crocks."></div>
+                <div class="story-text" data-text="[Placement text for the 1970s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
             </div>
         </div>
 
@@ -332,7 +350,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 1990s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1990">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -342,7 +359,7 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">1990s: Learning & Connection</h2>
-                <div class="story-text" data-text="After bringing five daughters into the world and drinking a bottle of her own brewed wine every single day during her confinement periods, she credits this ancestral tonic for her vibrant health, strength, and vitality today."></div>
+                <div class="story-text" data-text="[Placement text for the 1990s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
             </div>
         </div>
 
@@ -351,7 +368,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 2000s CHAPTER -->
         <div class="timeline-row row-right" id="sec-2000">
             <img src="images/rice-field-r.png" class="deco-asset field-slide slide-from-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -361,7 +377,7 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">2000s: Modern Continuation</h2>
-                <div class="story-text" data-text="Under her mother's guidance in the family kitchen, Mich learned how this extraordinary flavor enhancer completely transforms ordinary home-cooked ingredients into restaurant-quality heritage masterpieces, releasing an aromatic vapor that defines true Wok Hei."></div>
+                <div class="story-text" data-text="[Placement text for the 2000s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
             </div>
         </div>
 
@@ -370,7 +386,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 2020s CHAPTER -->
         <div class="timeline-row row-left" id="sec-2020">
             <img src="images/rice-field.png" class="deco-asset field-slide slide-from-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -380,11 +395,10 @@
             </div>
             <div class="story-text-wrapper">
                 <h2 class="section-header">2020s: Heritage Meets Modern Table</h2>
-                <div class="story-text" data-text="Brought to life by a dedicated intergenerational partnership – Mich, who steers our business vision, and her mother, our Master Brewer - we are fiercely dedicated to protecting a vanishing cultural craft."></div>
+                <div class="story-text" data-text="[Placement text for the 2020s era. Waiting for Jack to provide the final emotional expanded copy for this section to fit the timeline beautifully...]"></div>
             </div>
         </div>
 
-        <!-- THE GLORIOUS ENDING -->
         <div class="ending-container" id="sec-ending">
             <img src="images/footer.png" class="sunrise-img" alt="Footer Ink Wash" onerror="this.src='images/footer-bg.jpg'">
             <h2 class="ending-text">Legacy Shared</h2>
@@ -428,7 +442,14 @@
                 if(field) field.classList.add('reveal-field');
                 
                 setTimeout(() => {
-                    if(stalk) stalk.classList.add('reveal-stalk');
+                    if(stalk) {
+                        stalk.classList.add('reveal-stalk');
+                        // Activates the continuous swaying animation after the stalk has grown in
+                        setTimeout(() => {
+                            if(stalk.classList.contains('stalk-grow-left')) stalk.classList.add('sway-active-left');
+                            if(stalk.classList.contains('stalk-grow-right')) stalk.classList.add('sway-active-right');
+                        }, 2000); 
+                    }
                 }, 1500);
 
                 setTimeout(() => {
