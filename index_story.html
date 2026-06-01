@@ -61,64 +61,66 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: hidden; 
+            overflow: visible; /* Changed to allow full bleed */
         }
 
-        /* --- TIMELINE CHAPTER ROW --- */
+        /* --- TIMELINE CHAPTER ROW (Made Taller for spacing) --- */
         .timeline-row {
             display: flex;
             width: 100%;
             justify-content: space-between;
             align-items: center;
             position: relative;
-            padding: 60px 0;
-            min-height: 500px;
+            z-index: 10;
+            padding: 80px 0;
+            min-height: 650px; /* Increased height to stop squeezing */
+            margin-bottom: 40px;
         }
 
         .row-left { flex-direction: row; }
         .row-right { flex-direction: row-reverse; }
 
-        /* --- LAYER 3: RICE FIELDS (Sweeping across screen) --- */
+        /* --- LAYER 3: RICE FIELDS (Forced Full Screen Bleed & Lowered) --- */
         .deco-asset.field-slide {
             position: absolute;
-            bottom: -5%;
-            width: 100vw; /* Stretches edge to edge */
-            z-index: 20; /* LAYER 3 */
+            bottom: -15%; /* Pushed way lower to stay off text */
+            width: 100vw; 
+            left: calc(-50vw + 50%); /* Magic trick to break out of container to absolute edges */
+            z-index: 20; 
             opacity: 0;
             pointer-events: none;
             transition: all 2.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        /* Left-anchored field starts off-screen RIGHT and slides LEFT */
-        .field-slide-left { left: 0; transform: translateX(100vw); }
-        /* Right-anchored field starts off-screen LEFT and slides RIGHT */
-        .field-slide-right { right: 0; transform: translateX(-100vw); }
+        
+        .field-slide-left { transform: translateX(-15vw); }
+        .field-slide-right { transform: translateX(15vw); }
 
-        /* --- LAYER 2: RICE STALKS (Anchored to edges) --- */
+        /* --- LAYER 2: RICE STALKS (Forced to Absolute Edges & Lowered) --- */
         .deco-asset.stalk-grow {
             position: absolute;
-            bottom: -5%;
+            bottom: -15%; /* Matches field depth */
             height: 90vh;
-            z-index: 30; /* LAYER 2 */
+            z-index: 30; 
             opacity: 0;
             pointer-events: none;
             transform-origin: bottom center;
             transition: all 2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .stalk-grow-left { left: 0; transform: translateY(30%) rotate(-10deg); }
-        .stalk-grow-right { right: 0; transform: translateY(30%) rotate(10deg); }
+        .stalk-grow-left { left: calc(-50vw + 50%); transform: translateY(30%) rotate(-10deg); }
+        .stalk-grow-right { right: calc(-50vw + 50%); transform: translateY(30%) rotate(10deg); }
 
         /* Active Reveal States */
         .reveal-field { opacity: 1 !important; transform: translateX(0) !important; }
         .reveal-stalk { opacity: 0.95 !important; transform: translateY(0) rotate(0deg) !important; }
 
-        /* --- LAYER 4: IMAGE (Safely behind scenery) --- */
+        /* --- LAYER 4: IMAGE (Scaled up & placed safely in back) --- */
         .story-image-wrapper {
             position: relative;
             flex: 0 0 56%; 
             max-width: 56%;
             aspect-ratio: 16 / 9;
             background: transparent;
-            z-index: 10; /* LAYER 4 (BOTTOM) */
+            z-index: 10; 
             opacity: 0;
             transform: scale(0.95);
             transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -127,8 +129,7 @@
         .story-image-wrapper.reveal-blob {
             opacity: 1;
             transform: scale(1);
-            -webkit-mask-image: url('images/black-ink.webp');
-            mask-image: url('images/black-ink.webp');
+            /* CSS Mask removed from here - it's dynamically added via JS now to fix the caching bug! */
             -webkit-mask-size: 100% 100%;
             mask-size: 100% 100%;
             -webkit-mask-position: center;
@@ -146,17 +147,17 @@
         .filter-1950 { filter: sepia(0.6) grayscale(0.4) contrast(1.2); }
         .filter-1990 { filter: saturate(1.1) contrast(1.05); }
 
-        /* --- LAYER 1: TEXT AREA (Highest Z-Index) --- */
+        /* --- LAYER 1: TEXT AREA (Pushed Higher) --- */
         .story-text-wrapper {
             position: relative;
             flex: 0 0 40%;
             max-width: 40%;
             display: flex;
             flex-direction: column;
-            align-self: flex-start;
-            margin-top: 3%; 
+            align-self: flex-start; /* Keeps text at the very top of the box */
+            margin-top: -20px; /* Pushed even higher away from field */
             padding: 0 20px;
-            z-index: 40; /* LAYER 1 (TOP) */
+            z-index: 40; 
         }
 
         .section-header {
@@ -188,7 +189,7 @@
             width: 100%;
             height: 280px;
             position: relative;
-            margin: -10px 0;
+            margin: -20px 0;
             z-index: 35;
         }
 
@@ -218,7 +219,6 @@
         .trail-reverse .d4 { left: 47%; }
         .trail-reverse .d5 { left: 50%; }
         .trail-reverse .d6 { left: 52%; }
-
 
         /* --- GLORIOUS SUNRISE ENDING CONTAINER --- */
         .ending-container {
@@ -263,7 +263,8 @@
            ========================================= */
         @media screen and (max-width: 1024px) {
             .dot-trail-container { display: none; } 
-            .content-row { flex-direction: column !important; gap: 20px; padding: 40px 0; }
+            .timeline-row { min-height: auto; padding: 40px 0;}
+            .content-row { flex-direction: column !important; gap: 20px; }
             .story-image-wrapper { flex: 0 0 auto; width: 90%; max-width: 90%; z-index: 10;}
             .story-text-wrapper { flex: 0 0 auto; width: 95%; max-width: 95%; text-align: center; margin-top: 20px; z-index: 40;}
             .deco-asset { display: none; } 
@@ -293,8 +294,7 @@
 
     <div class="timeline-container">
         
-        <!-- 1950s CHAPTER -->
-        <div class="timeline-row row-left" id="sec-1950">
+        <div class="timeline-row row-left" id="sec-1950" data-is-first="true">
             <img src="images/rice-field-r.png" class="deco-asset field-slide field-slide-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
             
@@ -312,7 +312,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 1970s CHAPTER -->
         <div class="timeline-row row-right" id="sec-1970">
             <img src="images/rice-field.png" class="deco-asset field-slide field-slide-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -331,7 +330,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 1990s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1990">
             <img src="images/rice-field-r.png" class="deco-asset field-slide field-slide-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -350,7 +348,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 2000s CHAPTER -->
         <div class="timeline-row row-right" id="sec-2000">
             <img src="images/rice-field.png" class="deco-asset field-slide field-slide-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -364,7 +361,6 @@
             </div>
         </div>
 
-        <!-- THE GLORIOUS SUNRISE ENDING -->
         <div class="ending-container" id="sec-ending">
             <img src="images/sunrise.png" class="sunrise-img" alt="Glorious Sunrise" onerror="this.src='sunrise.jpg'">
             <h2 class="ending-text">Legacy Shared</h2>
@@ -398,7 +394,7 @@
             // Chain Reaction Engine: Triggers the sequence perfectly in order!
             function playTimelineSequence(row) {
                 if (!row || row.classList.contains('sequence-played')) return;
-                row.classList.add('sequence-played'); // Locks it from playing twice
+                row.classList.add('sequence-played'); 
 
                 const field = row.querySelector('.field-slide');
                 const stalk = row.querySelector('.stalk-grow');
@@ -407,7 +403,7 @@
                 const textNode = row.querySelector('.story-text');
                 const trailContainer = row.nextElementSibling;
                 
-                // 1. 0s: Rice field slides in (from opposite side)
+                // 1. 0s: Rice field slides in 
                 if(field) field.classList.add('reveal-field');
                 
                 // 2. 1.5s later: Rice stalk grows
@@ -415,12 +411,18 @@
                     if(stalk) stalk.classList.add('reveal-stalk');
                 }, 1500);
 
-                // 3. 1.0s later (2.5s total): Image blob reveals behind scenery
+                // 3. 1.0s later (2.5s total): Image blob reveals 
                 setTimeout(() => {
-                    if(imgWrap) imgWrap.classList.add('reveal-blob');
+                    if(imgWrap) {
+                        // THE FIX: Adding a timestamp forces the browser to replay the animation every time!
+                        const freshMask = `url('images/black-ink.webp?v=${new Date().getTime()}')`;
+                        imgWrap.style.webkitMaskImage = freshMask;
+                        imgWrap.style.maskImage = freshMask;
+                        imgWrap.classList.add('reveal-blob');
+                    }
                 }, 2500);
 
-                // 4. 1.5s later (4.0s total): Text types in front of scenery
+                // 4. 1.5s later (4.0s total): Text types in front
                 setTimeout(() => {
                     if(header) header.classList.add('reveal-text');
                     if(textNode) {
@@ -431,8 +433,7 @@
                                 if (trailContainer && trailContainer.classList.contains('dot-trail-container')) {
                                     const dots = trailContainer.querySelectorAll('.trail-dot');
                                     if (dots.length > 0) {
-                                        dots[0].classList.add('reveal-dot'); // Pop the first dot
-                                        // Tag the remaining dots so the scroll event can find them
+                                        dots[0].classList.add('reveal-dot'); 
                                         for (let i = 1; i < dots.length; i++) {
                                             dots[i].classList.add('ready-for-scroll');
                                         }
@@ -454,18 +455,16 @@
             window.addEventListener('scroll', () => {
                 const triggerPoint = window.innerHeight * 0.85; 
                 
-                // Check if any "ready" dots have scrolled into view
                 document.querySelectorAll('.trail-dot.ready-for-scroll').forEach(dot => {
                     if (dot.getBoundingClientRect().top < triggerPoint) {
                         dot.classList.remove('ready-for-scroll');
                         dot.classList.add('reveal-dot');
 
-                        // Is this the final dot in the current trail? 
+                        // Check if it's the final dot
                         const container = dot.closest('.dot-trail-container');
                         const allDots = container.querySelectorAll('.trail-dot');
                         
                         if (dot === allDots[allDots.length - 1]) {
-                            // If it's the last dot, instantly trigger the next era row!
                             const nextRow = container.nextElementSibling;
                             if (nextRow && nextRow.classList.contains('timeline-row')) {
                                 playTimelineSequence(nextRow);
@@ -474,7 +473,6 @@
                     }
                 });
 
-                // Final sunrise reveal
                 const ending = document.getElementById('sec-ending');
                 if (ending && ending.getBoundingClientRect().top < window.innerHeight * 0.7) {
                     ending.classList.add('reveal-ending');
