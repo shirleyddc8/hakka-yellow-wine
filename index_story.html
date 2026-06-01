@@ -60,7 +60,7 @@
             text-align: center;
             width: 100%;
             max-width: 900px;
-            margin: 120px auto 80px auto; 
+            margin: 80px auto 80px auto; /* Reduced from 120px to pull everything up 1cm! */
             padding-top: 20px;
             z-index: 10;
             position: relative;
@@ -227,8 +227,15 @@
             margin-top: -60px; 
         }
 
+        /* Specifically target 1950s image to make it bigger and move it up */
+        #sec-1950 .story-image-wrapper {
+            flex: 0 0 62%; 
+            max-width: 62%;
+            margin-top: -110px; 
+        }
+        
         #sec-1970 .story-image-wrapper {
-            margin-top: -90px; /* Shifted up exactly 1cm */
+            margin-top: -90px; 
         }
         
         .story-image-wrapper.reveal-blob {
@@ -264,8 +271,14 @@
             z-index: 40; 
         }
 
+        /* Specifically adjust 1950s text area to fit alongside the bigger image */
+        #sec-1950 .story-text-wrapper {
+            flex: 0 0 35%;
+            max-width: 35%;
+            margin-top: -95px; 
+        }
+
         /* Pulls text up by 1 line for the specific sections */
-        #sec-1950 .story-text-wrapper,
         #sec-1970 .story-text-wrapper,
         #sec-1990 .story-text-wrapper,
         #sec-2000 .story-text-wrapper {
@@ -344,15 +357,15 @@
         .path-2 .d1 { top: 0%; left: 70%; }
         .path-2 .d2 { top: 30%; left: 68%; } 
         .path-2 .d3 { top: 60%; left: 65%; } 
-        .path-2 .d4 { top: 70%; left: 61%; } /* Shifted slightly closer to d3 */
-        .path-2 .d5 { top: 80%; left: 54%; }
+        .path-2 .d4 { top: 72%; left: 61%; } 
+        .path-2 .d5 { top: 100%; left: 54%; }
         
         /* UNIQUE PATH 3: 1990s */
         .path-3 {
-            margin-top: 240px !important; /* Pushed down 8cm */
+            margin-top: 240px !important; 
             height: 220px;
         }
-        .path-3 .d1 { top: 0%; left: 30%; } /* Swept left by 10cm */
+        .path-3 .d1 { top: 0%; left: 30%; } 
         .path-3 .d2 { top: 20%; left: 27%; }
         .path-3 .d3 { top: 40%; left: 33%; }
         .path-3 .d4 { top: 60%; left: 38%; }
@@ -360,11 +373,11 @@
 
         /* UNIQUE PATH 4: 2000s */
         .path-4 {
-            margin-top: 240px !important; /* Pushed down 8cm */
+            margin-top: 240px !important; 
             height: 220px;
         }
-        .path-4 .d1 { top: 0%; left: 50%; } /* Swept right by 15cm */
-        .path-4 .d2 { top: 20%; left: 54%; } /* Placed exactly halfway between d1 and d3 */
+        .path-4 .d1 { top: 0%; left: 50%; } 
+        .path-4 .d2 { top: 20%; left: 54%; } 
         .path-4 .d3 { top: 40%; left: 58%; }
         .path-4 .d4 { top: 60%; left: 56%; }
         .path-4 .d5 { top: 80%; left: 54%; }
@@ -574,7 +587,6 @@
                 type();
             }
 
-            // Updated function with an optional 'isScroll' flag to make text appear instantly when triggered by a dot!
             function playTimelineSequence(row, isScroll = false) {
                 if (!row || row.classList.contains('sequence-played')) return;
                 row.classList.add('sequence-played'); 
@@ -586,7 +598,6 @@
                 const textNode = row.querySelector('.story-text');
                 const trailContainer = row.nextElementSibling;
                 
-                // Timing logic: If triggered by scrolling the last dot, text appears immediately (0ms delay)
                 const timeField = isScroll ? 0 : 0;
                 const timeStalk = isScroll ? 200 : 1500;
                 const timeImg = isScroll ? 400 : 2500;
@@ -634,7 +645,6 @@
                 }, timeText);
             }
 
-            // Kept exactly as is: Triggers the first row after the initial delay
             setTimeout(() => {
                 const firstRow = document.querySelector('#sec-1950');
                 if (firstRow) playTimelineSequence(firstRow);
@@ -651,11 +661,10 @@
                         const container = dot.closest('.dot-trail-container');
                         const allDots = container.querySelectorAll('.trail-dot');
                         
-                        // If it's the last dot, instantly trigger the next row's text
                         if (dot === allDots[allDots.length - 1]) {
                             const nextRow = container.nextElementSibling;
                             if (nextRow && nextRow.classList.contains('timeline-row')) {
-                                playTimelineSequence(nextRow, true); // true = instant text
+                                playTimelineSequence(nextRow, true); 
                             }
                         }
                     }
