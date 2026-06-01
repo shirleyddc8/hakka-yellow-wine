@@ -55,13 +55,13 @@
         /* --- THE SCROLLABLE TIMELINE WRAPPER --- */
         .timeline-container {
             width: 100%;
-            max-width: 1400px;
+            max-width: 1500px; /* Slightly wider to accommodate larger images */
             margin: 0 auto;
             padding: 120px 20px 0 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: hidden; /* Contains the sliding assets */
+            overflow: hidden; 
         }
 
         /* --- TIMELINE CHAPTER ROW --- */
@@ -72,36 +72,36 @@
             align-items: center;
             position: relative;
             z-index: 10;
-            padding: 50px 0;
+            padding: 60px 0;
+            min-height: 500px;
         }
 
         .row-left { flex-direction: row; }
         .row-right { flex-direction: row-reverse; }
 
-        /* --- DECORATIVE ASSETS (RICE FIELDS & STALKS) --- */
+        /* --- DECORATIVE ASSETS (RICE FIELDS & STALKS) PUSHED TO EDGES --- */
         .deco-asset {
             position: absolute;
             pointer-events: none;
-            opacity: 0;
             z-index: 5;
             transition: all 2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
-        .field-slide-left { bottom: -10%; right: -15%; width: 65vw; transform: translateX(50%); }
-        .field-slide-right { bottom: -10%; left: -15%; width: 65vw; transform: translateX(-50%); }
+        .field-slide-left { bottom: -5%; left: 0; width: 75vw; transform: translateX(-100%); opacity: 0; }
+        .field-slide-right { bottom: -5%; right: 0; width: 75vw; transform: translateX(100%); opacity: 0; }
         
-        .stalk-grow-left { bottom: -10%; left: 0; height: 75vh; transform: translateY(30%) rotate(-10deg); transform-origin: bottom center; z-index: 15; }
-        .stalk-grow-right { bottom: -10%; right: 0; height: 75vh; transform: translateY(30%) rotate(10deg); transform-origin: bottom center; z-index: 15; }
+        .stalk-grow-left { bottom: -5%; left: -2%; height: 90vh; transform: translateY(30%) rotate(-10deg); transform-origin: bottom center; z-index: 15; opacity: 0; }
+        .stalk-grow-right { bottom: -5%; right: -2%; height: 90vh; transform: translateY(30%) rotate(10deg); transform-origin: bottom center; z-index: 15; opacity: 0; }
 
         /* Active Reveal States */
-        .deco-asset.reveal-field { opacity: 1; transform: translateX(0); }
-        .deco-asset.reveal-stalk { opacity: 0.95; transform: translateY(0) rotate(0deg); }
+        .reveal-field { opacity: 1 !important; transform: translateX(0) !important; }
+        .reveal-stalk { opacity: 0.95 !important; transform: translateY(0) rotate(0deg) !important; }
 
-        /* --- COMPACT RESPONSIVE FRAMES --- */
+        /* --- COMPACT RESPONSIVE FRAMES (SCALED UP) --- */
         .story-image-wrapper {
             position: relative;
-            flex: 0 0 52%;
-            max-width: 52%;
+            flex: 0 0 56%; /* Increased from 52% */
+            max-width: 56%;
             aspect-ratio: 16 / 9;
             background: transparent;
             opacity: 0;
@@ -133,21 +133,22 @@
         .filter-1950 { filter: sepia(0.6) grayscale(0.4) contrast(1.2); }
         .filter-1990 { filter: saturate(1.1) contrast(1.05); }
 
-        /* --- TEXT AREA --- */
+        /* --- TEXT AREA (MOVED HIGHER) --- */
         .story-text-wrapper {
-            flex: 0 0 42%;
-            max-width: 42%;
+            flex: 0 0 40%;
+            max-width: 40%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            align-self: flex-start; /* Pushes text to the top of the row */
+            margin-top: 3%; /* Fine-tune height */
             padding: 0 20px;
-            z-index: 10;
+            z-index: 20; /* Ensures it stays above the rice field */
         }
 
         .section-header {
             font-family: var(--font-nav);
             color: var(--color-accent);
-            font-size: clamp(22px, 2.2vw, 32px);
+            font-size: clamp(24px, 2.5vw, 36px);
             margin-bottom: 15px;
             text-transform: uppercase;
             opacity: 0;
@@ -158,7 +159,7 @@
 
         .story-text {
             font-family: var(--font-text);
-            font-size: clamp(15px, 1.3vw, 20px);
+            font-size: clamp(16px, 1.4vw, 22px);
             line-height: 1.7;
             color: var(--color-text);
             font-style: italic;
@@ -168,12 +169,12 @@
         .story-text.typing::after { content: '|'; animation: blink 1s step-end infinite; margin-left: 2px; color: var(--color-accent); }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- WINDING DOT TRAILS --- */
+        /* --- WINDING DOT TRAILS (SCALED UP) --- */
         .dot-trail-container {
             width: 100%;
-            height: 250px;
+            height: 280px;
             position: relative;
-            margin: -20px 0;
+            margin: -10px 0;
             z-index: 20;
         }
 
@@ -189,13 +190,13 @@
         
         .trail-dot.reveal-dot { opacity: 0.9; transform: scale(1); }
 
-        /* Winding Path Layouts - alternating sides */
-        .d1 { width: 30px; height: 30px; top: 0%; left: 50%; }
-        .d2 { width: 25px; height: 25px; top: 16%; left: 53%; }
-        .d3 { width: 20px; height: 20px; top: 33%; left: 55%; }
-        .d4 { width: 16px; height: 16px; top: 50%; left: 53%; }
-        .d5 { width: 12px; height: 12px; top: 66%; left: 50%; }
-        .d6 { width: 8px; height: 8px; top: 83%; left: 48%; }
+        /* Winding Path Layouts - Increased Sizes */
+        .d1 { width: 34px; height: 34px; top: 0%; left: 50%; }
+        .d2 { width: 28px; height: 28px; top: 18%; left: 53%; }
+        .d3 { width: 24px; height: 24px; top: 36%; left: 55%; }
+        .d4 { width: 20px; height: 20px; top: 54%; left: 53%; }
+        .d5 { width: 16px; height: 16px; top: 72%; left: 50%; }
+        .d6 { width: 12px; height: 12px; top: 90%; left: 48%; }
 
         .trail-reverse .d1 { left: 50%; }
         .trail-reverse .d2 { left: 47%; }
@@ -278,7 +279,6 @@
 
     <div class="timeline-container">
         
-        <!-- 1950s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1950" data-is-first="true">
             <img src="images/rice-field-r.png" class="deco-asset field-slide-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow-left" alt="Swaying stalk">
@@ -297,7 +297,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 1970s CHAPTER (Swapped Sides!) -->
         <div class="timeline-row row-right" id="sec-1970">
             <img src="images/rice-field.png" class="deco-asset field-slide-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow-right" alt="Swaying stalk">
@@ -316,7 +315,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 1990s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1990">
             <img src="images/rice-field-r.png" class="deco-asset field-slide-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow-left" alt="Swaying stalk">
@@ -335,7 +333,6 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
-        <!-- 2000s CHAPTER (Swapped Sides!) -->
         <div class="timeline-row row-right" id="sec-2000">
             <img src="images/rice-field.png" class="deco-asset field-slide-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow-right" alt="Swaying stalk">
@@ -349,7 +346,6 @@
             </div>
         </div>
 
-        <!-- THE GLORIOUS SUNRISE ENDING -->
         <div class="ending-container" id="sec-ending">
             <img src="images/sunrise.png" class="sunrise-img" alt="Glorious Sunrise" onerror="this.src='sunrise.jpg'">
             <h2 class="ending-text">Legacy Shared</h2>
@@ -361,7 +357,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             
             // Reusable Typewriter logic
-            function typeWriter(element, callback) {
+            function typeWriter(element) {
                 const textToType = element.getAttribute('data-text');
                 element.innerHTML = '';
                 let i = 0;
@@ -374,102 +370,95 @@
                         setTimeout(type, 20); 
                     } else {
                         element.classList.remove('typing');
-                        if(callback) callback();
                     }
                 }
                 type();
             }
 
-            // Core Logic for Animating each Timeline Row
+            // Chain Reaction 2: Triggers the Row animations
             function playTimelineSequence(row) {
-                const isFirst = row.getAttribute('data-is-first') === 'true';
-                
-                const field = row.querySelector('.field-slide-left, .field-slide-right');
-                const stalk = row.querySelector('.stalk-grow-left, .stalk-grow-right');
+                if (!row || row.classList.contains('sequence-played')) return;
+                row.classList.add('sequence-played'); // Prevents double-triggering
+
+                const field = row.querySelector('.deco-asset[class*="field-slide"]');
+                const stalk = row.querySelector('.deco-asset[class*="stalk-grow"]');
                 const imgWrap = row.querySelector('.story-image-wrapper');
                 const header = row.querySelector('.section-header');
                 const textNode = row.querySelector('.story-text');
-                const nextTrailContainer = row.nextElementSibling;
                 
-                if (isFirst) {
-                    // Initial load delays for 1950s (Steps 3, 4, 5, 6, 7)
-                    if(field) setTimeout(() => field.classList.add('reveal-field'), 1500);
-                    if(stalk) setTimeout(() => stalk.classList.add('reveal-stalk'), 3000);
-                    setTimeout(() => imgWrap.classList.add('reveal-blob'), 4000);
+                // 1. Field slides in immediately
+                if(field) field.classList.add('reveal-field');
+                
+                // 2. Exact 1 second delay: Stalk grows & Blob reveals
+                setTimeout(() => {
+                    if(stalk) stalk.classList.add('reveal-stalk');
+                    if(imgWrap) imgWrap.classList.add('reveal-blob');
                     
+                    // 3. Text types out perfectly synced with the blob reveal
                     setTimeout(() => {
-                        header.classList.add('reveal-text');
-                        textNode.classList.add('reveal-text');
-                        typeWriter(textNode, () => {
-                            // 3s after text finishes, reveal 1st dot and activate scroll listener for the rest
-                            setTimeout(() => activateTrail(nextTrailContainer), 3000);
-                        });
-                    }, 5500);
-
-                } else {
-                    // Scroll-based load delays for subsequent eras (Steps 8, 9, 10, 11)
-                    if(field) field.classList.add('reveal-field'); // 0s
-                    if(stalk) stalk.classList.add('reveal-stalk'); // 0s
-                    
-                    setTimeout(() => imgWrap.classList.add('reveal-blob'), 1000);
-                    
-                    setTimeout(() => {
-                        header.classList.add('reveal-text');
-                        textNode.classList.add('reveal-text');
-                        typeWriter(textNode, () => {
-                            setTimeout(() => activateTrail(nextTrailContainer), 3000);
-                        });
-                    }, 2000);
-                }
+                        if(header) header.classList.add('reveal-text');
+                        if(textNode) textNode.classList.add('reveal-text');
+                        typeWriter(textNode);
+                    }, 500); 
+                }, 1000);
             }
 
-            // Activates the trail. Pops the first dot, flags the rest for scroll revealing.
-            function activateTrail(trailContainer) {
-                if(!trailContainer || !trailContainer.classList.contains('dot-trail-container')) return;
+            // Chain Reaction 1: Triggers the dots one by one
+            function playTrailSequence(trail) {
+                if(!trail || trail.classList.contains('sequence-played')) return;
+                trail.classList.add('sequence-played');
+
+                const dots = trail.querySelectorAll('.trail-dot');
+                const nextRow = trail.nextElementSibling;
                 
-                const dots = trailContainer.querySelectorAll('.trail-dot');
-                if(dots.length > 0) {
-                    dots[0].classList.add('reveal-dot'); // 1st dot appears automatically
-                    
-                    // Mark remaining dots as ready for scroll reveal
-                    for(let i = 1; i < dots.length; i++) {
-                        dots[i].classList.add('ready-for-scroll');
-                    }
-                }
+                dots.forEach((dot, index) => {
+                    setTimeout(() => {
+                        dot.classList.add('reveal-dot');
+                        
+                        // If it is the final dot, it passes the baton to the next row!
+                        if (index === dots.length - 1 && nextRow && nextRow.classList.contains('timeline-row')) {
+                            setTimeout(() => {
+                                playTimelineSequence(nextRow);
+                            }, 500); // Waits half a second after the last dot appears before sliding the field
+                        }
+                    }, index * 400); // 400ms delay between each dot appearing
+                });
             }
 
-            // Intersection Observer to trigger row sequences
-            const rowObserver = new IntersectionObserver((entries, observer) => {
+            // Observers to watch when elements enter the screen
+            const rowObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    // Only automatically trigger the very FIRST row on load
+                    if (entry.isIntersecting && entry.target.getAttribute('data-is-first') === 'true') {
                         playTimelineSequence(entry.target);
-                        observer.unobserve(entry.target); // Play only once
                     }
                 });
             }, { threshold: 0.3 });
 
-            document.querySelectorAll('.timeline-row').forEach(row => {
-                rowObserver.observe(row);
-            });
-
-            // Scroll listener for the remaining trail dots and the final sunset
-            const ending = document.getElementById('sec-ending');
-            
-            window.addEventListener('scroll', () => {
-                const triggerPoint = window.innerHeight * 0.85; // Triggers when dot is in lower part of screen
-                
-                document.querySelectorAll('.trail-dot.ready-for-scroll').forEach(dot => {
-                    if (dot.getBoundingClientRect().top < triggerPoint) {
-                        dot.classList.remove('ready-for-scroll');
-                        dot.classList.add('reveal-dot');
+            const trailObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // When the user scrolls to a dot trail, start the chain reaction
+                    if (entry.isIntersecting) {
+                        playTrailSequence(entry.target);
                     }
                 });
+            }, { threshold: 0.6 }); 
 
-                // Final sunrise reveal
-                if (ending && ending.getBoundingClientRect().top < window.innerHeight * 0.7) {
+            // Initialize Observers
+            const firstRow = document.querySelector('#sec-1950');
+            if(firstRow) rowObserver.observe(firstRow);
+            
+            document.querySelectorAll('.dot-trail-container').forEach(trail => {
+                trailObserver.observe(trail);
+            });
+            
+            const ending = document.getElementById('sec-ending');
+            const endObserver = new IntersectionObserver((entries) => {
+                if(entries[0].isIntersecting) {
                     ending.classList.add('reveal-ending');
                 }
-            });
+            }, { threshold: 0.5 });
+            if(ending) endObserver.observe(ending);
         });
     </script>
 </body>
