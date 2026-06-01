@@ -37,7 +37,7 @@
             z-index: -10; pointer-events: none;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (Now Fluid!) --- */
         .top-nav {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
             padding: 5px 40px; background-color: rgba(253, 251, 247, 0.85);
@@ -50,9 +50,15 @@
             background-position: center top; opacity: 0.5; z-index: -1;
         }
         .nav-brand { display: flex; align-items: center; z-index: 2; }
-        .nav-logo { height: 60px; object-fit: contain; }
-        .top-nav ul { list-style: none; display: flex; gap: 40px; margin: 0; padding: 0; align-items: center; z-index: 2; }
-        .top-nav a { text-decoration: none; color: var(--color-accent); font-family: var(--font-nav); font-size: 24px; font-weight: 700; transition: opacity 0.3s ease; }
+        
+        /* Logo smoothly shrinks */
+        .nav-logo { height: clamp(40px, 4vw, 60px); object-fit: contain; } 
+        
+        /* Gap between links smoothly shrinks */
+        .top-nav ul { list-style: none; display: flex; gap: clamp(15px, 2.5vw, 40px); margin: 0; padding: 0; align-items: center; z-index: 2; }
+        
+        /* Font size smoothly shrinks */
+        .top-nav a { text-decoration: none; color: var(--color-accent); font-family: var(--font-nav); font-size: clamp(16px, 1.5vw, 24px); font-weight: 700; transition: opacity 0.3s ease; }
         .top-nav a:hover, .top-nav a.active { opacity: 0.7; }
 
         /* --- THE SLIDING RICE FIELD BASE --- */
@@ -103,16 +109,18 @@
             flex-direction: row;
             justify-content: space-between; 
             align-items: center;
+            gap: 4%;
             width: 95%; 
             max-width: 1500px;
             z-index: 20; 
-            margin-top: 6vh; 
+            margin-top: clamp(4vh, 6vh, 8vh); 
         }
 
-        /* --- LEFT SIDE: 16:9 WIDESCREEN IMAGE FRAME --- */
+        /* --- LEFT SIDE: THE STRAIGHTJACKET FRAME --- */
         .story-image-wrapper {
             position: relative; 
-            width: 68%; 
+            flex: 0 0 62%; /* Rigidly sets size */
+            max-width: 62%; /* Ultimate straightjacket */
             aspect-ratio: 16 / 9; 
             height: auto; 
             background: transparent; overflow: hidden; 
@@ -133,29 +141,28 @@
             -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
         }
         
-        /* THE CAMERA TILT FIX */
         .story-img { 
             width: 100%; height: 100%; 
             object-fit: cover; 
-            /* Moved from 'center' to 'center 10%' to prioritize the top of the photo! */
             object-position: center 10%; 
         } 
         
         .filter-1950 { -webkit-filter: sepia(0.8) grayscale(0.5) contrast(1.3) brightness(0.9); filter: sepia(0.8) grayscale(0.5) contrast(1.3) brightness(0.9); }
         .filter-1990 { -webkit-filter: saturate(1.2) contrast(1.1) hue-rotate(-5deg); filter: saturate(1.2) contrast(1.1) hue-rotate(-5deg); }
 
-        /* --- RIGHT SIDE: TEXT AREA --- */
+        /* --- RIGHT SIDE: THE TEXT STRAIGHTJACKET --- */
         .story-text-wrapper { 
             position: relative; 
-            width: 27%; 
-            height: 400px; 
+            flex: 0 0 32%; /* Rigidly sets size */
+            max-width: 32%; /* Ultimate straightjacket */
+            height: auto; 
             display: flex; flex-direction: column; justify-content: center;
         }
 
         .section-header {
             font-family: var(--font-nav);
             color: var(--color-accent);
-            font-size: 36px;
+            font-size: clamp(24px, 2.5vw, 36px); /* Fluid typography */
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -165,17 +172,46 @@
         }
         .section-header.active { opacity: 1; transform: translateY(0); }
         
-        .text-container { position: relative; height: 250px; }
+        .text-container { position: relative; height: 300px; }
 
         .story-text {
             position: absolute; 
             top: 0; left: 0; width: 100%;
-            font-family: var(--font-text); font-size: 22px; line-height: 2.2; color: var(--color-text);
+            font-family: var(--font-text); 
+            font-size: clamp(16px, 1.4vw, 22px); /* Fluid typography */
+            line-height: 1.8; /* Slightly tightened so it never spills out */
+            color: var(--color-text);
             opacity: 0; pointer-events: none;
         }
         .story-text.active { opacity: 1; pointer-events: auto; }
         .story-text::after { content: '|'; animation: blink 1s step-end infinite; margin-left: 2px; color: var(--color-accent); }
         @keyframes blink { 50% { opacity: 0; } }
+
+        /* =========================================
+           RESPONSIVE DESIGN (iPad & Smaller Laptops)
+           ========================================= */
+        @media screen and (max-width: 1024px) {
+            .story-section { padding-top: 60px; }
+            .content-row {
+                flex-direction: column; /* Force them to stack! */
+                justify-content: center;
+                margin-top: 4vh;
+                gap: 20px;
+            }
+            .story-image-wrapper {
+                flex: 0 0 auto;
+                width: 85%; /* Let it take up most of the screen width */
+                max-width: 85%;
+            }
+            .story-text-wrapper {
+                flex: 0 0 auto;
+                width: 90%; 
+                max-width: 90%;
+                text-align: center; /* Center the text to match the stacked image */
+                height: 220px;
+            }
+            .text-container { height: 100%; }
+        }
 
     </style>
 </head>
@@ -193,7 +229,6 @@
         
         <ul>
             <li><a href="index.html">Home</a></li>
-            
             <li><a href="index_story.html" class="active">Our Story</a></li>
             <li><a href="#">Testimonials</a></li>
             <li><a href="#">Confinement Care</a></li>
