@@ -80,10 +80,10 @@
         .row-left { flex-direction: row; }
         .row-right { flex-direction: row-reverse; }
 
-        /* --- LAYER 3: RICE FIELDS (Moved down ~3cm) --- */
+        /* --- LAYER 3: RICE FIELDS (Moved lower by 3cm) --- */
         .deco-asset.field-slide {
             position: absolute;
-            bottom: -22%; 
+            bottom: -25%; 
             width: 90vw; 
             z-index: 20; 
             opacity: 0;
@@ -94,10 +94,10 @@
         .slide-from-right { right: calc(-50vw + 50%); transform: translateX(50vw); }
         .slide-from-left { left: calc(-50vw + 50%); transform: translateX(-50vw); }
 
-        /* --- LAYER 2: RICE STALKS (Moved down ~3cm) --- */
+        /* --- LAYER 2: RICE STALKS (Moved lower by 3cm to match fields) --- */
         .deco-asset.stalk-grow {
             position: absolute;
-            bottom: -10%; 
+            bottom: -13%; 
             height: 55vh; 
             z-index: 30; 
             opacity: 0;
@@ -111,7 +111,7 @@
         .reveal-field { opacity: 1 !important; transform: translateX(0) !important; }
         .reveal-stalk { opacity: 0.95 !important; transform: translateY(0) rotate(0deg) !important; }
 
-        /* Continuous Sway Animations (Activated via JS after reveal) */
+        /* Continuous Sway Animations */
         @keyframes swayLeft {
             0% { transform: translateY(0) rotate(0deg); }
             100% { transform: translateY(0) rotate(-4deg); }
@@ -196,12 +196,12 @@
         .story-text.typing::after { content: '|'; animation: blink 1s step-end infinite; margin-left: 2px; color: var(--color-accent); }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- WINDING DOT TRAILS (Pulled UP into the ink wash) --- */
+        /* --- WINDING DOT TRAILS --- */
         .dot-trail-container {
             width: 100%;
             height: 180px; 
             position: relative;
-            margin-top: -40px; /* Pulled up so the first dot anchors in the ink wash! */
+            margin-top: -60px; /* Pulled further up to guarantee exact overlap on the field's edge */
             margin-bottom: 0px;
             z-index: 35;
         }
@@ -218,20 +218,45 @@
         
         .trail-dot.reveal-dot { opacity: 0.9; transform: scale(1); }
 
-        /* Sizes */
-        .d1 { width: 34px; height: 34px; top: 0%; left: 50%; }
-        .d2 { width: 28px; height: 28px; top: 20%; left: 53%; }
-        .d3 { width: 24px; height: 24px; top: 40%; left: 55%; }
-        .d4 { width: 20px; height: 20px; top: 60%; left: 53%; }
-        .d5 { width: 16px; height: 16px; top: 80%; left: 50%; }
-        .d6 { width: 12px; height: 12px; top: 100%; left: 48%; }
+        /* Base Dot Sizes */
+        .d1 { width: 34px; height: 34px; }
+        .d2 { width: 28px; height: 28px; }
+        .d3 { width: 24px; height: 24px; }
+        .d4 { width: 20px; height: 20px; }
+        .d5 { width: 16px; height: 16px; }
+        .d6 { width: 12px; height: 12px; }
 
-        .trail-reverse .d1 { left: 50%; }
-        .trail-reverse .d2 { left: 47%; }
-        .trail-reverse .d3 { left: 45%; }
-        .trail-reverse .d4 { left: 47%; }
-        .trail-reverse .d5 { left: 50%; }
-        .trail-reverse .d6 { left: 52%; }
+        /* UNIQUE PATH 1: 1950s (Starts 6cm to the left, sweeps gently right) */
+        .path-1 .d1 { top: 0%; left: 38%; } 
+        .path-1 .d2 { top: 20%; left: 42%; }
+        .path-1 .d3 { top: 40%; left: 46%; }
+        .path-1 .d4 { top: 60%; left: 50%; }
+        .path-1 .d5 { top: 80%; left: 52%; }
+        .path-1 .d6 { top: 100%; left: 50%; }
+
+        /* UNIQUE PATH 2: 1970s (Starts slightly right, snakes deeply to the left) */
+        .path-2 .d1 { top: 0%; left: 58%; }
+        .path-2 .d2 { top: 20%; left: 60%; }
+        .path-2 .d3 { top: 40%; left: 55%; }
+        .path-2 .d4 { top: 60%; left: 48%; }
+        .path-2 .d5 { top: 80%; left: 44%; }
+        .path-2 .d6 { top: 100%; left: 48%; }
+
+        /* UNIQUE PATH 3: 1990s (Starts center-left, wide arc to the right) */
+        .path-3 .d1 { top: 0%; left: 45%; }
+        .path-3 .d2 { top: 20%; left: 42%; }
+        .path-3 .d3 { top: 40%; left: 48%; }
+        .path-3 .d4 { top: 60%; left: 55%; }
+        .path-3 .d5 { top: 80%; left: 58%; }
+        .path-3 .d6 { top: 100%; left: 54%; }
+
+        /* UNIQUE PATH 4: 2000s (Starts center, tight zig-zag down) */
+        .path-4 .d1 { top: 0%; left: 52%; }
+        .path-4 .d2 { top: 20%; left: 48%; }
+        .path-4 .d3 { top: 40%; left: 54%; }
+        .path-4 .d4 { top: 60%; left: 46%; }
+        .path-4 .d5 { top: 80%; left: 50%; }
+        .path-4 .d6 { top: 100%; left: 48%; }
 
         /* --- GLORIOUS ENDING CONTAINER --- */
         .ending-container {
@@ -325,7 +350,7 @@
             </div>
         </div>
 
-        <div class="dot-trail-container">
+        <div class="dot-trail-container path-1">
             <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
@@ -344,7 +369,7 @@
             </div>
         </div>
 
-        <div class="dot-trail-container trail-reverse">
+        <div class="dot-trail-container path-2">
             <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
@@ -363,7 +388,7 @@
             </div>
         </div>
 
-        <div class="dot-trail-container">
+        <div class="dot-trail-container path-3">
             <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
@@ -382,7 +407,7 @@
             </div>
         </div>
 
-        <div class="dot-trail-container trail-reverse">
+        <div class="dot-trail-container path-4">
             <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
