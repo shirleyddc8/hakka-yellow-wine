@@ -226,9 +226,10 @@
         .d5 { width: 16px; height: 16px; }
         .d6 { width: 12px; height: 12px; }
 
-        /* UNIQUE PATH 1: 1950s (Starts 6cm to the left, sweeps gently right) */
-        dot-trail-container.path-1 {
-            margin-top: 160px; /* Changed from the default -60px to lower the start point */
+        /* UNIQUE PATH 1: 1950s (Forced lower below the field and shifted left) */
+        .path-1 {
+            margin-top: 90px !important; /* The !important tag forces it to ignore the old -60px rule */
+            height: 220px; /* Makes the path taller so the dots stretch out smoothly */
         }
         .path-1 .d1 { top: 0%; left: 30%; } 
         .path-1 .d2 { top: 20%; left: 34%; }
