@@ -61,10 +61,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: visible; /* Changed to allow full bleed */
+            overflow: visible; 
         }
 
-        /* --- TIMELINE CHAPTER ROW (Made Taller for spacing) --- */
+        /* --- TIMELINE CHAPTER ROW --- */
         .timeline-row {
             display: flex;
             width: 100%;
@@ -73,19 +73,19 @@
             position: relative;
             z-index: 10;
             padding: 80px 0;
-            min-height: 650px; /* Increased height to stop squeezing */
+            min-height: 650px;
             margin-bottom: 40px;
         }
 
         .row-left { flex-direction: row; }
         .row-right { flex-direction: row-reverse; }
 
-        /* --- LAYER 3: RICE FIELDS (Forced Full Screen Bleed & Lowered) --- */
+        /* --- LAYER 3: RICE FIELDS (Lowered further down) --- */
         .deco-asset.field-slide {
             position: absolute;
-            bottom: -15%; /* Pushed way lower to stay off text */
+            bottom: -25%; /* Pushed down an extra 10% to keep clear of text */
             width: 100vw; 
-            left: calc(-50vw + 50%); /* Magic trick to break out of container to absolute edges */
+            left: calc(-50vw + 50%); 
             z-index: 20; 
             opacity: 0;
             pointer-events: none;
@@ -95,25 +95,25 @@
         .field-slide-left { transform: translateX(-15vw); }
         .field-slide-right { transform: translateX(15vw); }
 
-        /* --- LAYER 2: RICE STALKS (Forced to Absolute Edges & Lowered) --- */
+        /* --- LAYER 2: RICE STALKS (10% Smaller & Flushed to Edges) --- */
         .deco-asset.stalk-grow {
             position: absolute;
-            bottom: -15%; /* Matches field depth */
-            height: 90vh;
+            bottom: -25%; /* Matches the lowered field */
+            height: 80vh; /* Reduced from 90vh */
             z-index: 30; 
             opacity: 0;
             pointer-events: none;
-            transform-origin: bottom center;
             transition: all 2s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        .stalk-grow-left { left: calc(-50vw + 50%); transform: translateY(30%) rotate(-10deg); }
-        .stalk-grow-right { right: calc(-50vw + 50%); transform: translateY(30%) rotate(10deg); }
+        /* Anchored directly to the left/right corners so they hug the edges */
+        .stalk-grow-left { left: calc(-50vw + 50%); transform-origin: bottom left; transform: translateY(30%) rotate(-3deg); }
+        .stalk-grow-right { right: calc(-50vw + 50%); transform-origin: bottom right; transform: translateY(30%) rotate(3deg); }
 
         /* Active Reveal States */
         .reveal-field { opacity: 1 !important; transform: translateX(0) !important; }
         .reveal-stalk { opacity: 0.95 !important; transform: translateY(0) rotate(0deg) !important; }
 
-        /* --- LAYER 4: IMAGE (Scaled up & placed safely in back) --- */
+        /* --- LAYER 4: IMAGE (Pushed Higher Up) --- */
         .story-image-wrapper {
             position: relative;
             flex: 0 0 56%; 
@@ -124,12 +124,13 @@
             opacity: 0;
             transform: scale(0.95);
             transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            align-self: flex-start; /* Pushes image to the very top */
+            margin-top: -60px; /* Lifts image visibly higher than the text */
         }
         
         .story-image-wrapper.reveal-blob {
             opacity: 1;
             transform: scale(1);
-            /* CSS Mask removed from here - it's dynamically added via JS now to fix the caching bug! */
             -webkit-mask-size: 100% 100%;
             mask-size: 100% 100%;
             -webkit-mask-position: center;
@@ -147,15 +148,15 @@
         .filter-1950 { filter: sepia(0.6) grayscale(0.4) contrast(1.2); }
         .filter-1990 { filter: saturate(1.1) contrast(1.05); }
 
-        /* --- LAYER 1: TEXT AREA (Pushed Higher) --- */
+        /* --- LAYER 1: TEXT AREA (Maintains current position) --- */
         .story-text-wrapper {
             position: relative;
             flex: 0 0 40%;
             max-width: 40%;
             display: flex;
             flex-direction: column;
-            align-self: flex-start; /* Keeps text at the very top of the box */
-            margin-top: -20px; /* Pushed even higher away from field */
+            align-self: flex-start; 
+            margin-top: -20px; 
             padding: 0 20px;
             z-index: 40; 
         }
@@ -265,7 +266,7 @@
             .dot-trail-container { display: none; } 
             .timeline-row { min-height: auto; padding: 40px 0;}
             .content-row { flex-direction: column !important; gap: 20px; }
-            .story-image-wrapper { flex: 0 0 auto; width: 90%; max-width: 90%; z-index: 10;}
+            .story-image-wrapper { flex: 0 0 auto; width: 90%; max-width: 90%; z-index: 10; margin-top: 0;}
             .story-text-wrapper { flex: 0 0 auto; width: 95%; max-width: 95%; text-align: center; margin-top: 20px; z-index: 40;}
             .deco-asset { display: none; } 
             .ending-container { height: 30vh; }
@@ -294,6 +295,7 @@
 
     <div class="timeline-container">
         
+        <!-- 1950s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1950" data-is-first="true">
             <img src="images/rice-field-r.png" class="deco-asset field-slide field-slide-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -312,6 +314,7 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
+        <!-- 1970s CHAPTER -->
         <div class="timeline-row row-right" id="sec-1970">
             <img src="images/rice-field.png" class="deco-asset field-slide field-slide-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -330,6 +333,7 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
+        <!-- 1990s CHAPTER -->
         <div class="timeline-row row-left" id="sec-1990">
             <img src="images/rice-field-r.png" class="deco-asset field-slide field-slide-left" alt="Rice Field">
             <img src="images/ricestalk.png" class="deco-asset stalk-grow stalk-grow-left" alt="Swaying stalk">
@@ -348,6 +352,7 @@
             <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
         </div>
 
+        <!-- 2000s CHAPTER -->
         <div class="timeline-row row-right" id="sec-2000">
             <img src="images/rice-field.png" class="deco-asset field-slide field-slide-right" alt="Rice Field">
             <img src="images/ricestalk-r.png" class="deco-asset stalk-grow stalk-grow-right" alt="Swaying stalk">
@@ -361,6 +366,7 @@
             </div>
         </div>
 
+        <!-- THE GLORIOUS SUNRISE ENDING -->
         <div class="ending-container" id="sec-ending">
             <img src="images/sunrise.png" class="sunrise-img" alt="Glorious Sunrise" onerror="this.src='sunrise.jpg'">
             <h2 class="ending-text">Legacy Shared</h2>
@@ -391,7 +397,7 @@
                 type();
             }
 
-            // Chain Reaction Engine: Triggers the sequence perfectly in order!
+            // Chain Reaction Engine
             function playTimelineSequence(row) {
                 if (!row || row.classList.contains('sequence-played')) return;
                 row.classList.add('sequence-played'); 
@@ -414,7 +420,7 @@
                 // 3. 1.0s later (2.5s total): Image blob reveals 
                 setTimeout(() => {
                     if(imgWrap) {
-                        // THE FIX: Adding a timestamp forces the browser to replay the animation every time!
+                        // The dynamic timestamp forces the blob to run every single time
                         const freshMask = `url('images/black-ink.webp?v=${new Date().getTime()}')`;
                         imgWrap.style.webkitMaskImage = freshMask;
                         imgWrap.style.maskImage = freshMask;
