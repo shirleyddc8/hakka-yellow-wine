@@ -80,10 +80,10 @@
         .row-left { flex-direction: row; }
         .row-right { flex-direction: row-reverse; }
 
-        /* --- LAYER 3: RICE FIELDS --- */
+        /* --- LAYER 3: RICE FIELDS (Moved up ~3cm) --- */
         .deco-asset.field-slide {
             position: absolute;
-            bottom: -22%; 
+            bottom: -14%; 
             width: 90vw; 
             z-index: 20; 
             opacity: 0;
@@ -94,11 +94,11 @@
         .slide-from-right { right: calc(-50vw + 50%); transform: translateX(50vw); }
         .slide-from-left { left: calc(-50vw + 50%); transform: translateX(-50vw); }
 
-        /* --- LAYER 2: RICE STALKS (Reduced to 64vh) --- */
+        /* --- LAYER 2: RICE STALKS (Level with field, 20% smaller) --- */
         .deco-asset.stalk-grow {
             position: absolute;
-            bottom: -25%; 
-            height: 64vh; /* 20% smaller than the previous 80vh */
+            bottom: -14%; 
+            height: 50vh; 
             z-index: 30; 
             opacity: 0;
             pointer-events: none;
@@ -183,12 +183,12 @@
         .story-text.typing::after { content: '|'; animation: blink 1s step-end infinite; margin-left: 2px; color: var(--color-accent); }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- WINDING DOT TRAILS (Tighter Spacing) --- */
+        /* --- WINDING DOT TRAILS (Pulled higher to meet the raised fields) --- */
         .dot-trail-container {
             width: 100%;
-            height: 180px; /* Reduced from 280px for a much tighter gap between dots */
+            height: 180px; 
             position: relative;
-            margin-top: 100px; 
+            margin-top: 40px; 
             margin-bottom: 0px;
             z-index: 35;
         }
@@ -445,7 +445,6 @@
                     if(textNode) {
                         textNode.classList.add('reveal-text');
                         typeWriter(textNode, () => {
-                            // FAST-TRACKED: Changed from 3000ms to 2000ms!
                             setTimeout(() => {
                                 if (trailContainer && trailContainer.classList.contains('dot-trail-container')) {
                                     const dots = trailContainer.querySelectorAll('.trail-dot');
