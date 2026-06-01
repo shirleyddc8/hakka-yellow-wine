@@ -60,7 +60,7 @@
             text-align: center;
             width: 100%;
             max-width: 900px;
-            margin: 120px auto 80px auto; /* Added top margin to clear the fixed nav */
+            margin: 120px auto 80px auto; 
             padding-top: 20px;
             z-index: 10;
             position: relative;
@@ -125,7 +125,7 @@
             width: 100%;
             max-width: 1500px;
             margin: 0 auto;
-            padding: 0 20px 0 20px; /* Reduced top padding since the intro handles it now */
+            padding: 0 20px 0 20px; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -151,7 +151,7 @@
         /* --- LAYER 3: RICE FIELDS --- */
         .deco-asset.field-slide {
             position: absolute;
-            bottom: -25%; 
+            bottom: -33%; /* Pushed down an extra 3cm */
             width: 90vw; 
             z-index: 20; 
             opacity: 0;
@@ -165,7 +165,7 @@
         /* --- LAYER 2: RICE STALKS --- */
         .deco-asset.stalk-grow {
             position: absolute;
-            bottom: -13%; 
+            bottom: -21%; /* Lowered to match the field */
             height: 55vh; 
             z-index: 30; 
             opacity: 0;
@@ -234,7 +234,7 @@
             display: flex;
             flex-direction: column;
             align-self: flex-start; 
-            margin-top: -20px; 
+            margin-top: -60px; /* Pulled up higher so it stays away from the grass! */
             padding: 0 20px;
             z-index: 40; 
         }
@@ -286,17 +286,16 @@
         
         .trail-dot.reveal-dot { opacity: 0.9; transform: scale(1); }
 
-        /* Base Dot Sizes */
+        /* Base Dot Sizes (d6 removed) */
         .d1 { width: 34px; height: 34px; }
         .d2 { width: 28px; height: 28px; }
         .d3 { width: 24px; height: 24px; }
         .d4 { width: 20px; height: 20px; }
         .d5 { width: 16px; height: 16px; }
-        .d6 { width: 12px; height: 12px; }
 
         /* UNIQUE PATH 1: 1950s */
         .path-1 {
-            margin-top: 90px !important; 
+            margin-top: 120px !important; /* Pushed down more to avoid the lowered field */
             height: 220px; 
         }
         .path-1 .d1 { top: 0%; left: 30%; } 
@@ -304,19 +303,17 @@
         .path-1 .d3 { top: 40%; left: 38%; }
         .path-1 .d4 { top: 60%; left: 42%; }
         .path-1 .d5 { top: 80%; left: 44%; }
-        .path-1 .d6 { top: 100%; left: 42%; }
 
         /* UNIQUE PATH 2: 1970s */
         .path-2 {
-            margin-top: 90px !important; 
+            margin-top: 120px !important; /* Pushed down more to avoid the lowered field */
             height: 220px; 
         }
         .path-2 .d1 { top: 0%; left: 70%; }
-        .path-2 .d2 { top: 20%; left: 72%; }
-        .path-2 .d3 { top: 40%; left: 67%; }
+        .path-2 .d2 { top: 30%; left: 72%; }
+        .path-2 .d3 { top: 35%; left: 63%; }
         .path-2 .d4 { top: 60%; left: 60%; }
         .path-2 .d5 { top: 80%; left: 56%; }
-        .path-2 .d6 { top: 100%; left: 60%; }
         
         /* UNIQUE PATH 3: 1990s */
         .path-3 .d1 { top: 0%; left: 45%; }
@@ -324,7 +321,6 @@
         .path-3 .d3 { top: 40%; left: 48%; }
         .path-3 .d4 { top: 60%; left: 55%; }
         .path-3 .d5 { top: 80%; left: 58%; }
-        .path-3 .d6 { top: 100%; left: 54%; }
 
         /* UNIQUE PATH 4: 2000s */
         .path-4 .d1 { top: 0%; left: 52%; }
@@ -332,7 +328,6 @@
         .path-4 .d3 { top: 40%; left: 54%; }
         .path-4 .d4 { top: 60%; left: 46%; }
         .path-4 .d5 { top: 80%; left: 50%; }
-        .path-4 .d6 { top: 100%; left: 48%; }
 
         /* --- GLORIOUS ENDING CONTAINER --- */
         .ending-container {
@@ -411,7 +406,7 @@
     </nav>
 
     <div class="story-intro-section">
-        <img src="images/making-process.jpg" alt="Brewing Process" class="intro-hero-img">
+        <img src="images/making-process.png" alt="Brewing Process" class="intro-hero-img">
         
         <h1 class="intro-main-title">A Journey Through Time: The Story of Our Liquid Gold</h1>
         
@@ -440,7 +435,7 @@
 
         <div class="dot-trail-container path-1">
             <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
-            <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
+            <div class="trail-dot d4"></div><div class="trail-dot d5"></div>
         </div>
 
         <div class="timeline-row row-right" id="sec-1970">
@@ -458,7 +453,7 @@
 
         <div class="dot-trail-container path-2">
             <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
-            <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
+            <div class="trail-dot d4"></div><div class="trail-dot d5"></div>
         </div>
 
         <div class="timeline-row row-left" id="sec-1990">
@@ -476,7 +471,7 @@
 
         <div class="dot-trail-container path-3">
             <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
-            <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
+            <div class="trail-dot d4"></div><div class="trail-dot d5"></div>
         </div>
 
         <div class="timeline-row row-right" id="sec-2000">
@@ -494,7 +489,7 @@
 
         <div class="dot-trail-container path-4">
             <div class="trail-dot d1"></div><div class="trail-dot d2"></div><div class="trail-dot d3"></div>
-            <div class="trail-dot d4"></div><div class="trail-dot d5"></div><div class="trail-dot d6"></div>
+            <div class="trail-dot d4"></div><div class="trail-dot d5"></div>
         </div>
 
         <div class="timeline-row row-left" id="sec-2020">
