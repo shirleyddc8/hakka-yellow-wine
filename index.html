@@ -540,6 +540,7 @@
             margin: 0 auto;
             position: relative;
             z-index: 10;
+            scroll-margin-top: 100px; /* NEW: Prevents the fixed nav from hiding the title */
         }
 
         .testimony-header {
@@ -712,6 +713,13 @@
             align-items: center;
             gap: 30px;
             margin-top: 20px;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
         }
 
         .footer-social i {
@@ -912,6 +920,7 @@
     </header>
 
     <section class="mission-split-section">
+        <!-- Right-Side Decorations -->
         <img src="images/rice-field-r.png" class="rice-field-right" alt="Rice Field Ink Wash Right">
         <div class="stalk-container-right">
             <img src="images/ricestalk-r.png" class="rice-stalk-right" alt="Swaying Rice Stalks Right">
@@ -966,6 +975,7 @@
         </div>
 
         <div class="testimony-grid">
+            <!-- Review 1 -->
             <div class="testimony-card">
                 <div class="reviewer-info">
                     <div class="reviewer-avatar">S</div>
@@ -977,6 +987,7 @@
                 <p class="testimony-text">"I ordered Hakka wine chicken last weekend. Wow! The flavor is unbeatable, you can taste the 40 day slow fermentation. No shortcuts. Ordering again ASAP!"</p>
             </div>
 
+            <!-- Review 2 -->
             <div class="testimony-card">
                 <div class="reviewer-info">
                     <div class="reviewer-avatar">A</div>
@@ -988,6 +999,7 @@
                 <p class="testimony-text">"My mother-in-law recommended yellow rice wine for circulation during confinement. Mich's recipe is smooth, comforting, and trusted by generations."</p>
             </div>
 
+            <!-- Review 3 -->
             <div class="testimony-card">
                 <div class="reviewer-info">
                     <div class="reviewer-avatar">J</div>
@@ -999,6 +1011,7 @@
                 <p class="testimony-text">"This wine brings back my grandmother's taste, rich, natural, and unforgettable. Thank you, Mich and Mum, for keeping our heritage alive!"</p>
             </div>
 
+            <!-- Review 4 -->
             <div class="testimony-card">
                 <div class="reviewer-info">
                     <div class="reviewer-avatar">M</div>
