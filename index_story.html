@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Roboto+Serif:opsz,wght@8..144,400;8..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
@@ -425,46 +426,110 @@
         .path-4 .d4 { top: 50%; left: 80%; } /* Shifted right */
         .path-4 .d5 { top: 60%; left: 76%; } /* Shifted right */
 
-        /* --- GLORIOUS ENDING CONTAINER --- */
-        .ending-container {
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            margin-top: 50px;
+        /* --- Footer --- */
+        footer {
             position: relative;
-            height: 45vh;
+            padding: 120px 20px 40px; 
+            text-align: center;
+            z-index: 10;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: transparent; 
         }
 
-        .footer-img {
+        .footer-bg-img {
             position: absolute;
-            top: 0; 
-            left: 5%; /* Pushes the entire image to the right */
-            width: 110%; /* Makes the image extra wide so the right edge doesn't show! */
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 1;
-            opacity: 0;
-            transform: scale(1.15); /* Bumped up from 1.1 to hide those tricky edges */
-            transition: all 3s ease;
+            object-position: center top; 
+            z-index: -1;
+            opacity: 0.9;
         }
-        .ending-container.reveal-ending .footer-img { opacity: 1; transform: scale(1); }
 
-        .ending-text {
-            position: relative;
-            z-index: 5;
-            font-family: var(--font-nav);
-            color: #8b2522;
-            font-size: clamp(24px, 3vw, 42px);
-            text-transform: uppercase;
-            text-shadow: 0 2px 15px rgba(255, 255, 255, 0.9);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.5s ease 1s;
+        .footer-content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .ending-container.reveal-ending .ending-text { opacity: 1; transform: translateY(0); }
+
+        .footer-columns {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-col i {
+            font-size: 48px;
+            color: #1a1a24;
+            margin-bottom: 15px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-header);
+            color: var(--color-accent);
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .footer-col p {
+            font-family: var(--font-text);
+            font-size: 18px; 
+            color: var(--color-text);
+            margin-bottom: 5px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .footer-social i {
+            font-size: 45px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-social .fa-square-facebook {
+            color: #3b5998;
+        }
+
+       .footer-social .fa-square-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-social i:hover {
+            transform: translateY(-5px);
+        }
+
+        .custom-google-icon {
+            width: 55px; 
+            height: 55px;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 50%; /* This rounds the corners just in case your image has a white background square */
+        }
+
+        .custom-google-icon:hover {
+            transform: translateY(-5px);
+        }
 
         /* --- INDEPENDENT RICEFIELD HEIGHT CONTROLS --- */
         /* Pushes 1950s, 1970s, and 1990s UP by approx 1cm */
@@ -514,8 +579,7 @@
                 bottom: -5%; 
                 opacity: 0.6 !important; 
             }
-            .ending-container { height: 30vh; }
-        }
+    
     </style>
 </head>
 <body>
@@ -638,10 +702,34 @@
             </div>
         </div>
 
-        <div class="ending-container" id="sec-ending">
-            <img src="images/footer.png" class="footer-img" alt="Footer Ink Wash" onerror="this.src='images/footer-bg.jpg'">
-            <h2 class="ending-text">Legacy Shared</h2>
+         <footer>
+        <img src="images/footer.png" class="footer-bg-img" alt="Ink wash background" onerror="this.src='images/footer-bg.jpg'">
+        
+        <div class="footer-content-wrapper">
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <i class="fa-solid fa-house"></i>
+                    <h4>Visit Us</h4>
+                    <p>Address: 123 Heritage Lane, Singapore</p>
+                </div>
+                <div class="footer-col">
+                    <i class="fa-solid fa-phone"></i>
+                    <h4>Call Us</h4>
+                    <p>Phone: +65 8888 9999</p>
+                </div>
+                <div class="footer-col">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h4>Email Us</h4>
+                    <p>Email: hello@hakkayellowwine.com</p>
+                </div>
+            </div>
+            <div class="footer-social">
+                <i class="fa-brands fa-square-facebook"></i>
+                <img src="images/google-logo.png" alt="Google" class="custom-google-icon">
+                <i class="fa-brands fa-square-instagram"></i>
+            </div>
         </div>
+    </footer>
 
     </div>
 
@@ -749,13 +837,7 @@
                         }
                     }
                 });
-
-                const ending = document.getElementById('sec-ending');
-                if (ending && ending.getBoundingClientRect().top < window.innerHeight * 0.7) {
-                    ending.classList.add('reveal-ending');
-                }
-            });
-            
+             });
         });
     </script>
 </body>
