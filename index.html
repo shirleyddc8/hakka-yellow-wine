@@ -118,7 +118,7 @@
             background-color: transparent; 
         }
 
-        /* Rice Field */
+        /* Left Rice Field */
         .rice-field {
             position: absolute;
             bottom: -5vh; 
@@ -133,20 +133,7 @@
             pointer-events: none;
         }
 
-        /* Wine Bottles Image */
-        .wine-bottles {
-            position: absolute;
-            bottom: 2vh; 
-            left: 8%; 
-            height: 31vh; 
-            width: auto;
-            object-fit: contain;
-            z-index: 20; 
-            opacity: 0; 
-            pointer-events: none;
-        }
-
-        /* Rice Stalk Container */
+        /* Left Rice Stalk Container */
         .stalk-container {
             position: absolute;
             left: -1%; 
@@ -164,6 +151,19 @@
             object-fit: contain;
             transform-origin: bottom left;
             animation: sway 6s ease-in-out infinite alternate;
+        }
+
+        /* Wine Bottles Image */
+        .wine-bottles {
+            position: absolute;
+            bottom: 2vh; 
+            left: 8%; 
+            height: 31vh; 
+            width: auto;
+            object-fit: contain;
+            z-index: 20; 
+            opacity: 0; 
+            pointer-events: none;
         }
 
         /* --- ANIMATION LAYERS --- */
@@ -271,9 +271,9 @@
         }
 
         .grandma-img {
-            flex: 0 0 55%; /* Rigidly sets size */
-            width: 55%; /* Forces width */
-            max-width: 55%; /* The ultimate straightjacket */
+            flex: 0 0 55%; 
+            width: 55%; 
+            max-width: 55%; 
             height: auto; 
             border-radius: 4px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
@@ -281,9 +281,9 @@
         }
 
         .text-content {
-            flex: 0 0 42%; /* Rigidly sets size */
-            width: 42%; /* Forces width */
-            max-width: 42%; /* The ultimate straightjacket */
+            flex: 0 0 42%; 
+            width: 42%; 
+            max-width: 42%; 
             padding-right: 0; 
             margin-top: 0; 
         }
@@ -297,6 +297,23 @@
             font-style: italic; 
             white-space: normal !important; 
             word-wrap: break-word;
+        }
+
+        .hero-title {
+            font-family: var(--font-header);
+            color: var(--color-accent);
+            font-size: clamp(32px, 3.5vw, 48px);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-text);
+            color: #444;
+            font-size: clamp(18px, 1.8vw, 24px);
+            font-weight: 400;
+            margin-bottom: 25px;
+            line-height: 1.4;
         }
 
         .placeholder-text::after { 
@@ -313,6 +330,141 @@
         }
 
         @keyframes blink { 50% { opacity: 0; } }
+
+        /* --- Mission Split Section --- */
+        .mission-split-section {
+            padding: 60px 5% 100px; 
+            position: relative;
+            z-index: 10;
+            overflow: hidden; 
+        }
+
+        /* Right-side asset defaults (Waiting for scroll trigger) */
+        .rice-field-right {
+            position: absolute;
+            bottom: -5vh;
+            right: 0;
+            width: 100%;
+            height: 35vh;
+            object-fit: cover;
+            object-position: right top;
+            z-index: 15; 
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .stalk-container-right {
+            position: absolute;
+            right: -1%;
+            bottom: 0;
+            height: 70vh;
+            z-index: 20; 
+            transform-origin: bottom center;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .rice-stalk-right {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            transform-origin: bottom right;
+            animation: swayRight 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes slideInRight {
+            0% { transform: translateX(100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes swayRight {
+            from { transform: rotate(2deg); }
+            to { transform: rotate(-3deg); }
+        }
+
+        .mission-split-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 3%; 
+            position: relative; 
+            /* REMOVED: z-index lock so children can overlap properly */
+        }
+
+        .mission-text-column {
+            flex: 0 0 42%; 
+            display: flex;
+            flex-direction: column;
+            
+            /* NEW: Pops the text forward above everything! */
+            position: relative;
+            z-index: 30;
+            
+            /* Initial Scroll State: Invisible text shifted slightly down */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        .mission-heading {
+            font-family: var(--font-header);
+            color: var(--color-accent); 
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0;
+            margin-bottom: 5px; 
+            text-align: left; 
+        }
+
+        .mission-body {
+            font-family: var(--font-text);
+            font-size: 22px; 
+            line-height: 1.6;
+            color: var(--color-text);
+            text-align: left;
+            margin-bottom: 40px; 
+        }
+
+        .mission-image-column {
+            flex: 0 0 55%; 
+        }
+
+        .mission-img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
+            object-fit: cover;
+            transform-origin: center right; 
+            
+            /* Initial Scroll State: Invisible photo shifted slightly down, with a 0.5s delay */
+            opacity: 0;
+            transform: scale(1.05) translateY(20px);
+            transition: opacity 2s ease 0.5s, transform 2s ease 0.5s; 
+        }
+
+        /* --- STAGGERED SCROLL ANIMATION TRIGGERS --- */
+        .mission-split-section.triggered .mission-text-column {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mission-split-section.triggered .mission-img {
+            opacity: 1; 
+            transform: scale(1.05) translateY(0);
+        }
+
+        .mission-split-section.triggered .rice-field-right {
+            /* Slides in with a 0.5s delay */
+            animation: slideInRight 3s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards !important;
+        }
+
+        .mission-split-section.triggered .stalk-container-right {
+            /* Grows up with a 1s delay */
+            animation: growUp 2.5s cubic-bezier(0.25, 1, 0.5, 1) 1s forwards !important;
+        }
 
         /* --- Product Section --- */
         .product-section {
@@ -503,7 +655,7 @@
             object-fit: contain;
             cursor: pointer;
             transition: transform 0.3s ease;
-            border-radius: 50%; /* This rounds the corners just in case your image has a white background square */
+            border-radius: 50%; 
         }
 
         .custom-google-icon:hover {
@@ -564,7 +716,6 @@
 
         @media screen and (max-width: 1400px) {
             .content-split { gap: 4%; width: 96%; }
-            /* Strict locks for smaller laptops */
             .grandma-img { flex: 0 0 50%; width: 50%; max-width: 50%; }
             .text-content { flex: 0 0 45%; width: 45%; max-width: 45%; min-height: 300px; padding-right: 0; }
             .placeholder-text {
@@ -582,7 +733,6 @@
                 margin-top: 120px;
                 gap: 20px;
             }
-            /* Strict locks for iPads/Mobile */
             .grandma-img {
                 flex: 0 0 auto;
                 width: 85%; 
@@ -598,12 +748,25 @@
                 padding-right: 0;
                 text-align: center; 
             }
-            .text-content h2, .text-content h3 { text-align: center; }
+            .text-content h1, .text-content h2, .text-content h3 { text-align: center; }
             .placeholder-text { font-size: 18px; }
-            .rice-field { height: 18vh; }
+            
+            .mission-split-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .mission-text-column, .mission-image-column {
+                flex: 0 0 100%;
+                width: 90%;
+                margin: 0 auto;
+            }
+            .mission-heading, .mission-body {
+                text-align: center;
+            }
+
+            .rice-field, .rice-field-right { height: 18vh; }
             .wine-bottles { height: 20vh; left: 5%; }
-            .stalk-container { height: 45vh; }
-            .side-stalk { height: 50vh; }
+            .stalk-container, .stalk-container-right { height: 45vh; }
         }
     </style>
 </head>
@@ -653,23 +816,45 @@
             <div class="content-split">
                 <img src="images/1990s.png" class="grandma-img" alt="Grandma and Daughter cooking">
                 <div class="text-content">
+                    <h1 class="hero-title">Authentic Hakka Yellow Wine</h1>
+                    <h2 class="hero-subtitle">Traditional Singaporean Small-Batch Huangjiu for Culinary Excellence and Postpartum Wellness</h2>
                     <div class="placeholder-text" data-text="&quot;Experience the deep, unmatched umami of a generations-old, 40-day slow-fermented yellow rice wine handcrafted locally in Singapore with absolute purity for premium sipping, daily gourmet cooking, and restorative traditional wellness.&quot;"></div>
                 </div>
             </div>
         </div>
     </header>
 
+    <section class="mission-split-section">
+        <img src="images/rice-field-r.png" class="rice-field-right" alt="Rice Field Ink Wash Right">
+        <div class="stalk-container-right">
+            <img src="images/ricestalk-r.png" class="rice-stalk-right" alt="Swaying Rice Stalks Right">
+        </div>
+
+        <div class="mission-split-container">
+            <div class="mission-text-column">
+                <h3 class="mission-heading">OUR MISSION</h3>
+                <p class="mission-body">We are an intergenerational partnership fiercely dedicated to protecting a vanishing cultural craft. Our authentic Hakka Yellow Wine is not just a product on a shelf; it is a living piece of culinary history, a time-tested health tonic, and a beautiful tribute to maternal love.</p>
+                
+                <h3 class="mission-heading">OUR PURPOSE</h3>
+                <p class="mission-body">We exist to provide an uncompromised level of quality that mass-produced commercial brands simply cannot match. By refusing synthetic shortcuts and honoring a strictly natural 40-day slow fermentation, we offer a dual-purpose elixir designed to elevate your daily gourmet cooking with deep umami, and serve as a restorative wellness tonic to support your body.</p>
+            </div>
+            
+            <div class="mission-image-column">
+                <img src="images/lifestyle-1.png" alt="Hakka Yellow Wine with Rice and Claypot" class="mission-img">
+            </div>
+        </div>
+    </section>
+
     <section class="product-section">
         <div class="product-images" id="product-slider">
             <img src="images/hero-1.png" class="product-slide slide-base" alt="Hakka Yellow Wine Bottle" style="opacity: 1;">
             <img src="images/hero-2.png" class="product-slide" alt="Hakka Yellow Wine with Pouch">
-            <img src="images/lifestyle-1.png" class="product-slide" alt="Hakka Yellow Wine Lifestyle">
         </div>
         
         <div class="product-details">
             <h2>Authentic Hakka Yellow Wine</h2>
             <h3>
-                Traditional Singaporean Small-Batch Huangjiu for Culinary Excellence and Postpartum Wellness
+                Elevate your daily cooking and traditional confinement care with our signature 40-day slow-brewed Huangjiu.
             </h3>
             <p class="ingredients">Ingredients: Glutinous Rice, Red Yeast, Traditional Herbs, Spring Water.</p>
             <div class="purchase-action">
@@ -719,9 +904,25 @@
             const wineBottles = document.querySelector('.wine-bottles');
             const riceField = document.querySelector('.rice-field');
             const stalkContainer = document.querySelector('.stalk-container');
+            
             const placeholderText = document.querySelector('.placeholder-text');
             const homeLink = document.querySelector('.home-link');
             
+            // Intersection Observer setup for the Mission Section
+            const missionSection = document.querySelector('.mission-split-section');
+            
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('triggered'); 
+                    }
+                });
+            }, { threshold: 0.15 }); 
+            
+            if (missionSection) {
+                scrollObserver.observe(missionSection);
+            }
+
             let animationTimers = [];
 
             function typeWriter(element) {
@@ -764,6 +965,11 @@
 
                 riceField.classList.remove('animate-field');
                 stalkContainer.classList.remove('animate-stalk');
+                
+                if (missionSection) {
+                    missionSection.classList.remove('triggered');
+                }
+                
                 ripple.style.animation = 'none';
                 ripple.style.opacity = '0';
                 contentSplit.style.opacity = '0';
@@ -777,6 +983,7 @@
                 animationTimers.push(setTimeout(() => { dots[0].classList.add('pop-in'); logoWrapper.classList.add('animate-flare-sweep'); }, 1500));
                 animationTimers.push(setTimeout(() => { dots[1].classList.add('pop-in'); }, 2200));
                 animationTimers.push(setTimeout(() => { dots[2].classList.add('pop-in'); }, 2900));
+                
                 animationTimers.push(setTimeout(() => { riceField.classList.add('animate-field'); }, 3500));
                 animationTimers.push(setTimeout(() => { stalkContainer.classList.add('animate-stalk'); }, 5500));
 
