@@ -127,7 +127,7 @@
         .bridge-title {
             font-family: var(--font-nav);
             color: var(--color-accent);
-            font-size: clamp(28px, 3vw, 40px);
+            font-size: clamp(32px, 4vw, 48px); /* UPDATED to match intro-main-title */
             margin-top: 80px;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -746,7 +746,7 @@
                     if (i < textToType.length) {
                         element.innerHTML += textToType.charAt(i);
                         i++;
-                        setTimeout(type, 20); 
+                        setTimeout(type, 5); 
                     } else {
                         element.classList.remove('typing');
                         if (callback) callback();
@@ -769,7 +769,7 @@
                 const timeField = isScroll ? 0 : 0;
                 const timeStalk = isScroll ? 200 : 1500;
                 const timeImg = isScroll ? 400 : 2500;
-                const timeText = isScroll ? 0 : 4000; 
+                const timeText = isScroll ? 0 : 2500; 
 
                 if(field) setTimeout(() => field.classList.add('reveal-field'), timeField);
                 
@@ -807,7 +807,7 @@
                                         }
                                     }
                                 }
-                            }, isScroll ? 500 : 2000); 
+                            }, isScroll ? 200 : 400); 
                         });
                     }
                 }, timeText);
