@@ -384,7 +384,7 @@
         .mission-split-container {
             display: flex;
             align-items: center;
-            justify-content: center; /* Centered content */
+            justify-content: center; 
             max-width: 1200px;
             margin: 0 auto;
             position: relative; 
@@ -392,11 +392,11 @@
         }
 
         .mission-text-column {
-            flex: 0 0 80%; /* Expands to fill the space left by the removed image */
-            max-width: 800px; /* Constrains line length for easy readability */
+            flex: 0 0 80%; 
+            max-width: 800px; 
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centers the headings and text inside */
+            align-items: center; 
             
             position: relative;
             z-index: 30;
@@ -415,7 +415,7 @@
             letter-spacing: 1px;
             margin-top: 0;
             margin-bottom: 10px; 
-            text-align: center; /* Centered header */
+            text-align: center; 
         }
 
         .mission-body {
@@ -423,8 +423,8 @@
             font-size: 22px; 
             line-height: 1.6;
             color: var(--color-text);
-            text-align: center; /* Centered text */
-            font-style: italic; /* Newly requested italics */
+            text-align: center; 
+            font-style: italic; 
             margin-bottom: 40px; 
         }
 
@@ -435,12 +435,10 @@
         }
 
         .mission-split-section.triggered .rice-field-right {
-            /* Slides in with a 0.5s delay */
             animation: slideInRight 3s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards !important;
         }
 
         .mission-split-section.triggered .stalk-container-right {
-            /* Grows up with a 1s delay */
             animation: growUp 2.5s cubic-bezier(0.25, 1, 0.5, 1) 1s forwards !important;
         }
 
@@ -534,6 +532,116 @@
         }
 
         .cta-btn:hover { background-color: #6b1c19; }
+
+        /* --- Testimonials Section --- */
+        .testimonials-section {
+            padding: 80px 5% 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .testimony-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .testimony-title {
+            font-family: var(--font-header);
+            color: var(--color-accent);
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .google-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: var(--font-text);
+            font-size: 20px;
+            color: #444;
+        }
+
+        .google-rating .stars i {
+            color: #fbbc05; 
+            font-size: 18px;
+        }
+
+        .rating-number {
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .small-google-icon {
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+            margin-left: 5px;
+        }
+
+        .testimony-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .testimony-card {
+            background: rgba(253, 251, 247, 0.85); 
+            border-radius: 4px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            border: 1px solid rgba(139, 37, 34, 0.1);
+            backdrop-filter: blur(4px);
+            transition: transform 0.3s ease;
+        }
+
+        .testimony-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .reviewer-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-family: var(--font-header);
+            font-weight: bold;
+        }
+
+        .reviewer-details h4 {
+            font-family: var(--font-header);
+            color: var(--color-accent);
+            margin: 0 0 5px 0;
+            font-size: 22px;
+        }
+
+        .reviewer-details p {
+            margin: 0;
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .testimony-text {
+            font-family: var(--font-text);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-text);
+        }
 
         /* --- Footer --- */
         footer {
@@ -742,6 +850,10 @@
             .rice-field, .rice-field-right { height: 18vh; }
             .wine-bottles { height: 20vh; left: 5%; }
             .stalk-container, .stalk-container-right { height: 45vh; }
+            
+            .testimony-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -756,9 +868,9 @@
             </a>
         </div>
         <ul>
-            <li><a href="#" class="active home-link">Home</a></li>
+            <li><a href="index.html" class="active home-link">Home</a></li>
             <li><a href="index_story.html">Our Story</a></li>
-            <li><a href="#">Testimonials</a></li>
+            <li><a href="index.html#testimonials">Testimonials</a></li>
             <li><a href="#">Confinement Care</a></li>
             <li><a href="#">Recipes</a></li>
             <li><a href="#">Contact Us</a></li>
@@ -800,7 +912,6 @@
     </header>
 
     <section class="mission-split-section">
-        <!-- Right-Side Decorations -->
         <img src="images/rice-field-r.png" class="rice-field-right" alt="Rice Field Ink Wash Right">
         <div class="stalk-container-right">
             <img src="images/ricestalk-r.png" class="rice-stalk-right" alt="Swaying Rice Stalks Right">
@@ -836,6 +947,71 @@
         </div>
     </section>
 
+    <section class="testimonials-section" id="testimonials">
+        <div class="testimony-header">
+            <h2 class="testimony-title">Hakka Yellow Wine</h2>
+            <div class="google-rating">
+                <span class="rating-number">4.9</span>
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <span class="review-count">(168)</span>
+                <img src="images/google-logo.png" alt="Google" class="small-google-icon">
+                <span class="review-text">reviews</span>
+            </div>
+        </div>
+
+        <div class="testimony-grid">
+            <div class="testimony-card">
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">S</div>
+                    <div class="reviewer-details">
+                        <h4>Sarah L</h4>
+                        <p>Home Cook</p>
+                    </div>
+                </div>
+                <p class="testimony-text">"I ordered Hakka wine chicken last weekend. Wow! The flavor is unbeatable, you can taste the 40 day slow fermentation. No shortcuts. Ordering again ASAP!"</p>
+            </div>
+
+            <div class="testimony-card">
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">A</div>
+                    <div class="reviewer-details">
+                        <h4>Amanda K</h4>
+                        <p>Postpartum Mom</p>
+                    </div>
+                </div>
+                <p class="testimony-text">"My mother-in-law recommended yellow rice wine for circulation during confinement. Mich's recipe is smooth, comforting, and trusted by generations."</p>
+            </div>
+
+            <div class="testimony-card">
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">J</div>
+                    <div class="reviewer-details">
+                        <h4>June</h4>
+                        <p>Returning Buyer</p>
+                    </div>
+                </div>
+                <p class="testimony-text">"This wine brings back my grandmother's taste, rich, natural, and unforgettable. Thank you, Mich and Mum, for keeping our heritage alive!"</p>
+            </div>
+
+            <div class="testimony-card">
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">M</div>
+                    <div class="reviewer-details">
+                        <h4>Mei Ying</h4>
+                        <p>Repeat Buyer</p>
+                    </div>
+                </div>
+                <p class="testimony-text">"True, small-batch Huangjiu in Singapore with zero sodium or preservatives? Nearly impossible, except here. Deep, savory, and worth every restock."</p>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <img src="images/footer.png" class="footer-bg-img" alt="Ink wash background" onerror="this.src='images/footer-bg.jpg'">
         
@@ -859,7 +1035,7 @@
             </div>
             <div class="footer-social">
                 <i class="fa-brands fa-square-facebook"></i>
-                <img src="images/google-logo.png" alt="Google" class="custom-google-icon">
+                <a href="#testimonials"><img src="images/google-logo.png" alt="Google" class="custom-google-icon"></a>
                 <i class="fa-brands fa-square-instagram"></i>
             </div>
         </div>
@@ -880,7 +1056,6 @@
             const placeholderText = document.querySelector('.placeholder-text');
             const homeLink = document.querySelector('.home-link');
             
-            // Intersection Observer setup for the Mission Section
             const missionSection = document.querySelector('.mission-split-section');
             
             const scrollObserver = new IntersectionObserver((entries) => {
