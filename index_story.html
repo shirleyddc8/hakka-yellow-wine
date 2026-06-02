@@ -440,11 +440,14 @@
 
         .footer-img {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; 
+            left: 5%; /* Pushes the entire image to the right */
+            width: 110%; /* Makes the image extra wide so the right edge doesn't show! */
+            height: 100%;
             object-fit: cover;
             z-index: 1;
             opacity: 0;
-            transform: scale(1.1);
+            transform: scale(1.15); /* Bumped up from 1.1 to hide those tricky edges */
             transition: all 3s ease;
         }
         .ending-container.reveal-ending .footer-img { opacity: 1; transform: scale(1); }
