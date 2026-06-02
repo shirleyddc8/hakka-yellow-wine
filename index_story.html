@@ -321,10 +321,11 @@
         }
 
         #sec-2020 .story-text-wrapper {
-            flex: 0 0 45%;
-            max-width: 42%;
+            flex: 0 0 50%;
+            max-width: 50%;
             margin-top: -115px; /* Shifted up 2 lines */
-            margin-left: -20px;
+            margin-left: 20px;
+            margin-right: -50px;
         }
 
         .section-header {
@@ -422,7 +423,7 @@
         .path-4 .d2 { top: 10%; left: 74%; } /* Shifted right */
         .path-4 .d3 { top: 30%; left: 78%; } /* Shifted right */
         .path-4 .d4 { top: 50%; left: 80%; } /* Shifted right */
-        .path-4 .d5 { top: 70%; left: 76%; } /* Shifted right */
+        .path-4 .d5 { top: 60%; left: 76%; } /* Shifted right */
 
         /* --- GLORIOUS ENDING CONTAINER --- */
         .ending-container {
@@ -462,6 +463,15 @@
         }
         .ending-container.reveal-ending .ending-text { opacity: 1; transform: translateY(0); }
 
+        /* --- INDEPENDENT RICEFIELD HEIGHT CONTROLS --- */
+        /* Pushes 1950s, 1970s, and 1990s UP by approx 1cm */
+        #sec-1950 .field-slide, #sec-1970 .field-slide, #sec-1990 .field-slide { bottom: -28%; }
+        #sec-1950 .stalk-grow, #sec-1970 .stalk-grow, #sec-1990 .stalk-grow { bottom: -16%; }
+
+        /* Pushes 2000s and 2020s UP by approx 2cm */
+        #sec-2000 .field-slide, #sec-2020 .field-slide { bottom: -23%; }
+        #sec-2000 .stalk-grow, #sec-2020 .stalk-grow { bottom: -11%; }
+        
         /* =========================================
            RESPONSIVE RE-STACKING FOR IPADS & MOBILE
            ========================================= */
@@ -491,9 +501,16 @@
                 z-index: 40;
             }
             
-            .deco-asset.field-slide { width: 130vw; bottom: 0%; opacity: 0.6 !important; }
-            .deco-asset.stalk-grow { height: 45vh; bottom: 0%; opacity: 0.5 !important; }
-
+            .deco-asset.field-slide { 
+                width: 100vw;   /* Changed from 130vw to perfectly fit the screen width */
+                bottom: -10%;   /* Adjusted to sit nicely on the tablet screen */
+                opacity: 0.7 !important; 
+            }
+            .deco-asset.stalk-grow { 
+                height: 35vh;   /* Shrunk from 45vh so they aren't overwhelmingly tall */
+                bottom: -5%; 
+                opacity: 0.6 !important; 
+            }
             .ending-container { height: 30vh; }
         }
     </style>
