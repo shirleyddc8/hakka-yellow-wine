@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Roboto+Serif:opsz,wght@8..144,400;8..144,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;400i&family=Roboto+Serif:opsz,wght@8..144,400;8..144,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -384,20 +384,20 @@
         .mission-split-container {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center; /* Centered content */
             max-width: 1200px;
             margin: 0 auto;
-            gap: 3%; 
             position: relative; 
-            /* REMOVED: z-index lock so children can overlap properly */
+            z-index: 10; 
         }
 
         .mission-text-column {
-            flex: 0 0 42%; 
+            flex: 0 0 80%; /* Expands to fill the space left by the removed image */
+            max-width: 800px; /* Constrains line length for easy readability */
             display: flex;
             flex-direction: column;
+            align-items: center; /* Centers the headings and text inside */
             
-            /* NEW: Pops the text forward above everything! */
             position: relative;
             z-index: 30;
             
@@ -414,8 +414,8 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 0;
-            margin-bottom: 5px; 
-            text-align: left; 
+            margin-bottom: 10px; 
+            text-align: center; /* Centered header */
         }
 
         .mission-body {
@@ -423,37 +423,15 @@
             font-size: 22px; 
             line-height: 1.6;
             color: var(--color-text);
-            text-align: left;
+            text-align: center; /* Centered text */
+            font-style: italic; /* Newly requested italics */
             margin-bottom: 40px; 
-        }
-
-        .mission-image-column {
-            flex: 0 0 55%; 
-        }
-
-        .mission-img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
-            object-fit: cover;
-            transform-origin: center right; 
-            
-            /* Initial Scroll State: Invisible photo shifted slightly down, with a 0.5s delay */
-            opacity: 0;
-            transform: scale(1.05) translateY(20px);
-            transition: opacity 2s ease 0.5s, transform 2s ease 0.5s; 
         }
 
         /* --- STAGGERED SCROLL ANIMATION TRIGGERS --- */
         .mission-split-section.triggered .mission-text-column {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .mission-split-section.triggered .mission-img {
-            opacity: 1; 
-            transform: scale(1.05) translateY(0);
         }
 
         .mission-split-section.triggered .rice-field-right {
@@ -755,13 +733,10 @@
                 flex-direction: column;
                 gap: 40px;
             }
-            .mission-text-column, .mission-image-column {
+            .mission-text-column {
                 flex: 0 0 100%;
                 width: 90%;
                 margin: 0 auto;
-            }
-            .mission-heading, .mission-body {
-                text-align: center;
             }
 
             .rice-field, .rice-field-right { height: 18vh; }
@@ -817,7 +792,7 @@
                 <img src="images/1990s.png" class="grandma-img" alt="Grandma and Daughter cooking">
                 <div class="text-content">
                     <h1 class="hero-title">Authentic Hakka Yellow Wine</h1>
-                    <h2 class="hero-subtitle">Traditional Singaporean Small-Batch Huangjiu for Culinary Excellence and Confinement Care</h2>
+                    <h2 class="hero-subtitle">Traditional Singaporean Small-Batch Huangjiu for Culinary Excellence and Postpartum Wellness</h2>
                     <div class="placeholder-text" data-text="&quot;Experience the deep, unmatched umami of a generations-old, 40-day slow-fermented yellow rice wine handcrafted locally in Singapore with absolute purity for premium sipping, daily gourmet cooking, and restorative traditional wellness.&quot;"></div>
                 </div>
             </div>
@@ -825,6 +800,7 @@
     </header>
 
     <section class="mission-split-section">
+        <!-- Right-Side Decorations -->
         <img src="images/rice-field-r.png" class="rice-field-right" alt="Rice Field Ink Wash Right">
         <div class="stalk-container-right">
             <img src="images/ricestalk-r.png" class="rice-stalk-right" alt="Swaying Rice Stalks Right">
@@ -837,10 +813,6 @@
                 
                 <h3 class="mission-heading">OUR PURPOSE</h3>
                 <p class="mission-body">We exist to provide an uncompromised level of quality that mass-produced commercial brands simply cannot match. By refusing synthetic shortcuts and honoring a strictly natural 40-day slow fermentation, we offer a dual-purpose elixir designed to elevate your daily gourmet cooking with deep umami, and serve as a restorative wellness tonic to support your body.</p>
-            </div>
-            
-            <div class="mission-image-column">
-                <img src="images/lifestyle-1.png" alt="Hakka Yellow Wine with Rice and Claypot" class="mission-img">
             </div>
         </div>
     </section>
