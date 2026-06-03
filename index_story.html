@@ -426,7 +426,7 @@
 
         /* UNIQUE PATH 1: 1950s */
         .path-1 {
-            margin-top: 120px !important; 
+            margin-top: 60px !important; 
             height: 220px; 
         }
         .path-1 .d1 { top: 0%; left: 30%; } 
@@ -607,12 +607,16 @@
             transform: translateY(-5px);
         }
 
-        /* --- INDEPENDENT RICEFIELD HEIGHT CONTROLS --- */
-        /* Pushes 1950s, 1970s, and 1990s UP by approx 1cm */
-        #sec-1950 .field-slide, #sec-1970 .field-slide, #sec-1990 .field-slide { bottom: -28%; }
-        #sec-1950 .stalk-grow, #sec-1970 .stalk-grow, #sec-1990 .stalk-grow { bottom: -16%; }
+       /* --- INDEPENDENT RICEFIELD HEIGHT CONTROLS --- */
+        
+        #sec-1950 .field-slide, #sec-1970 .field-slide, #sec-1990 .field-slide { 
+            bottom: -15%; /* Lifted up from -28% to create depth */
+        }
+        #sec-1950 .stalk-grow, #sec-1970 .stalk-grow, #sec-1990 .stalk-grow { 
+            bottom: -5%; /* Lifted up from -16% to match the field */
+        }
 
-        /* Pushes 2000s and 2020s UP by approx 2cm */
+        /* 2000s and 2020s Controls */
         #sec-2000 .field-slide, #sec-2020 .field-slide { bottom: -23%; }
         #sec-2000 .stalk-grow, #sec-2020 .stalk-grow { bottom: -11%; }
         
